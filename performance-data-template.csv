@@ -1,0 +1,40 @@
+Quarter,Category,Subcategory,SupportOffering,Percentage,Target,TeamName,RepName,RepRevenue,RepTarget,RepPercentOfTarget,RepProgress
+Q2-2026,Growth,Upgrade,,85,1000000,Team Ryan,John Smith,125000,100000,125,25
+Q2-2026,Growth,Upgrade,,85,1000000,Team Ryan,Sarah Johnson,118000,100000,118,24.2
+Q2-2026,Growth,Upgrade,,85,1000000,Team Ryan,Mike Davis,112000,100000,112,21.7
+Q2-2026,Growth,Upgrade,,85,1000000,Team Emily,Emily Brown,108000,100000,108,22.7
+Q2-2026,Growth,Upgrade,,85,1000000,Team Emily,David Wilson,105000,100000,105,20.7
+Q2-2026,Growth,Upgrade,,85,1000000,Team Emily,Lisa Anderson,98000,100000,98,18.5
+Q2-2026,Growth,Trade Up,,72,800000,Team Ryan,Alex Turner,95000,80000,119,26.7
+Q2-2026,Growth,Trade Up,,72,800000,Team Ryan,Jessica Lee,88000,80000,110,25.7
+Q2-2026,Growth,Trade Up,,72,800000,Team Emily,Robert Chen,82000,80000,103,26.2
+Q2-2026,Growth,Trade Up,,72,800000,Team Emily,Maria Garcia,78000,80000,98,25.8
+Q2-2026,Growth,Cap,,95,1200000,Team Ryan,Daniel Kim,145000,120000,121,20.8
+Q2-2026,Growth,Cap,,95,1200000,Team Ryan,Sophie Martinez,138000,120000,115,20
+Q2-2026,Growth,Cap,,95,1200000,Team Emily,James Taylor,132000,120000,110,20
+Q2-2026,Growth,Cap,,95,1200000,Team Emily,Linda White,128000,120000,107,19.6
+Q2-2026,Growth,Recovery,,68,600000,Team Ryan,Brian Foster,72000,60000,120,30.9
+Q2-2026,Growth,Recovery,,68,600000,Team Ryan,Amanda Scott,68000,60000,113,30.8
+Q2-2026,Growth,Recovery,,68,600000,Team Emily,George Hill,65000,60000,108,30
+Q2-2026,Growth,Support Offering,Extended Support,82,300000,Team Ryan,Christopher Lee,105000,100000,105,23.5
+Q2-2026,Growth,Support Offering,Extended Support,82,300000,Team Ryan,Michelle Wong,98000,100000,98,22.5
+Q2-2026,Growth,Support Offering,Extended Support,82,300000,Team Emily,Andrew Nelson,92000,100000,92,22.7
+Q2-2026,Growth,Support Offering,Sustained Support,75,300000,Team Ryan,David Martinez,95000,90000,106,26.7
+Q2-2026,Growth,Support Offering,Sustained Support,75,300000,Team Ryan,Lisa Thompson,88000,90000,98,25.7
+Q2-2026,Growth,Support Offering,Sustained Support,75,300000,Team Emily,Robert Chang,82000,90000,91,26.2
+Q2-2026,Growth,Support Offering,Advanced Support,76,300000,Team Ryan,Michael Chen,98000,90000,109,25.6
+Q2-2026,Growth,Support Offering,Advanced Support,76,300000,Team Ryan,Sarah Johnson,92000,90000,102,24.3
+Q2-2026,Growth,Support Offering,Advanced Support,76,300000,Team Emily,Thomas Anderson,85000,90000,94,25
+Q2-2026,ACV,S&S,,88,2000000,Team Ryan,William Turner,225000,200000,113,25
+Q2-2026,ACV,S&S,,88,2000000,Team Ryan,Elizabeth Hall,218000,200000,109,24.6
+Q2-2026,ACV,S&S,,88,2000000,Team Emily,Richard Allen,212000,200000,106,24.7
+Q2-2026,ACV,SL,,76,1500000,Team Ryan,Thomas Green,165000,150000,110,26.9
+Q2-2026,ACV,SL,,76,1500000,Team Ryan,Susan Baker,158000,150000,105,26.4
+Q2-2026,ACV,SL,,76,1500000,Team Emily,Charles Evans,152000,150000,101,24.6
+Q2-2026,ACV,SaaS,,92,2500000,Team Ryan,Matthew Rogers,285000,250000,114,26.7
+Q2-2026,ACV,SaaS,,92,2500000,Team Ryan,Betty Reed,278000,250000,111,26.4
+Q2-2026,ACV,SaaS,,92,2500000,Team Emily,Anthony Cook,272000,250000,109,24.8
+Q1-2026,Growth,Upgrade,,82,1000000,Team Ryan,John Smith,120000,100000,120,26.3
+Q1-2026,Growth,Upgrade,,82,1000000,Team Ryan,Sarah Johnson,115000,100000,115,25
+Q3-2026,Growth,Upgrade,,78,1000000,Team Ryan,John Smith,115000,100000,115,27.8
+Q3-2026,Growth,Upgrade,,78,1000000,Team Ryan,Sarah Johnson,110000,100000,110,25
