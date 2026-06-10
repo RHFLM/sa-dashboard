@@ -175,6 +175,33 @@
                                             }
                                         }, idx * 200);
                                     });
+                                    
+                                    // Attach team card click handlers for regular thermometers
+                                    teamCards.forEach(function(teamCard) {
+                                        teamCard.addEventListener('click', function(e) {
+                                            e.stopPropagation();
+                                            const repsList = teamCard.querySelector('.reps-list');
+                                            const wasExpanded = teamCard.classList.contains('expanded');
+                                            
+                                            // Close other team cards
+                                            teamCards.forEach(function(tc) {
+                                                if (tc !== teamCard) {
+                                                    tc.classList.remove('expanded');
+                                                    const rl = tc.querySelector('.reps-list');
+                                                    if (rl) rl.classList.remove('show');
+                                                }
+                                            });
+                                            
+                                            // Toggle this team card
+                                            if (!wasExpanded && repsList) {
+                                                teamCard.classList.add('expanded');
+                                                repsList.classList.add('show');
+                                            } else if (repsList) {
+                                                teamCard.classList.remove('expanded');
+                                                repsList.classList.remove('show');
+                                            }
+                                        });
+                                    });
                                 }, 100);
                             }
                         });
