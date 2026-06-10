@@ -49,7 +49,7 @@
         .reps-list { display: none; margin-top: 20px; padding-top: 20px; border-top: 2px solid #d0d0d0; }
         .reps-list.show { display: block; animation: slideDown 0.3s ease; }
         .reps-title { font-size: 1rem; font-weight: 600; color: #0f62fe; margin-bottom: 15px; }
-        .rep-item { background: white; border-radius: 6px; padding: 12px; margin-bottom: 10px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; align-items: center; font-size: 0.85rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .rep-item { background: white; border-radius: 6px; padding: 12px; margin-bottom: 10px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: center; font-size: 0.85rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .rep-item:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .rep-name { font-weight: 600; color: #1f1f1f; }
         .rep-value { color: #525252; }
@@ -86,6 +86,16 @@
         .info-table tbody tr:last-child td { border-bottom: none; }
         .info-table tbody tr:hover { background: #e8e8e8; }
         .tables-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        /* Region Filter Styles */
+        .filter-container { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .filter-label { font-size: 1.1rem; font-weight: 600; color: #1f1f1f; margin-bottom: 15px; }
+        .filter-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .quarter-btn { background: #f4f4f4; color: #525252; border: 2px solid #e0e0e0; padding: 10px 24px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .quarter-btn:hover { background: #e8e8e8; border-color: #0f62fe; }
+        .quarter-btn.active { background: #0f62fe; color: white; border-color: #0f62fe; }
+        .region-btn { padding: 16px 28px; font-size: 1.1rem; flex: 1; min-width: 140px; font-weight: 700; }
+        .quarter-filter-btn { padding: 16px 28px; font-size: 1.1rem; flex: 1; min-width: 140px; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -94,6 +104,44 @@
             <img src="NCEE banner.png" alt="NCEE #Love2Win Banner" style="width: 100%; height: auto; display: block;">
         </div>
         <h1>S&A Performance Dashboard</h1>
+        
+        <!-- Region Filter -->
+        <div class="filter-container" style="margin-bottom: 20px;">
+            <div class="filter-header">
+                <div class="filter-label">Select Region</div>
+                <div class="filter-buttons" id="region-filters">
+                    <button class="quarter-btn region-btn active" data-region="all">All EMEA</button>
+                    <button class="quarter-btn region-btn" data-region="ncee">NCEE</button>
+                    <button class="quarter-btn region-btn" data-region="dach">DACH</button>
+                    <button class="quarter-btn region-btn" data-region="france">France</button>
+                    <button class="quarter-btn region-btn" data-region="mea">MEA</button>
+                    <button class="quarter-btn region-btn" data-region="spgi">SPGI</button>
+                    <button class="quarter-btn region-btn" data-region="italy">Italy</button>
+                    <button class="quarter-btn region-btn" data-region="uki">UKI</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quarter Filter -->
+        <div class="filter-container" style="margin-bottom: 20px;">
+            <div class="filter-header">
+                <div class="filter-label">Select Quarter</div>
+                <div class="filter-buttons" id="quarter-filters">
+                    <button class="quarter-btn quarter-filter-btn active" data-quarter="all">Full Year</button>
+                    <button class="quarter-btn quarter-filter-btn" data-quarter="q1">Q1</button>
+                    <button class="quarter-btn quarter-filter-btn" data-quarter="q2">Q2</button>
+                    <button class="quarter-btn quarter-filter-btn" data-quarter="q3">Q3</button>
+                    <button class="quarter-btn quarter-filter-btn" data-quarter="q4">Q4</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Weekly Comparison -->
+        <div style="text-align: center; margin-bottom: 25px; padding: 15px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div style="font-size: 1.1rem; font-weight: 700; color: #1f1f1f;">
+                Weekly Comparison: <span id="previous-week-date" style="color: #525252;">Loading...</span> vs <span id="current-week-date" style="color: #0f62fe;">Loading...</span>
+            </div>
+        </div>
         
         <div class="section">
             <h2 class="section-title">Growth</h2>
@@ -113,262 +161,411 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('=== INITIALIZING DASHBOARD ===');
             
+            // Set comparison dates
+            if (typeof comparisonDates !== 'undefined') {
+                document.getElementById('previous-week-date').textContent = comparisonDates.previousWeek;
+                document.getElementById('current-week-date').textContent = comparisonDates.currentWeek;
+            }
+            
             // Initialize dashboard
             if (typeof initializeDashboard === 'function') {
                 initializeDashboard();
                 
-                // Wait for DOM to be ready, then attach event handlers and animate badges
+                // Wait for DOM to be ready, then attach event handlers
                 setTimeout(function() {
-                    // Animate message badges
-                    const badges = document.querySelectorAll('.message-badge');
-                    badges.forEach(function(badge) {
-                        setTimeout(function() {
-                            badge.classList.add('show');
-                        }, 2600);
-                    });
-                    
-                    const cards = document.querySelectorAll('.thermometer-card');
-                    console.log('Found ' + cards.length + ' thermometer cards');
-                    
-                    cards.forEach(function(card, index) {
-                        console.log('Attaching click handler to card ' + (index + 1));
-                        
-                        // Remove any existing listeners
-                        const newCard = card.cloneNode(true);
-                        card.parentNode.replaceChild(newCard, card);
-                        
-                        // Attach new click handler
-                        newCard.addEventListener('click', function(e) {
-                            console.log('Card clicked!', e.target);
-                            
-                            // Don't trigger if clicking inside drill-down
-                            if (e.target.closest('.drill-down')) {
-                                console.log('Clicked inside drill-down, ignoring');
-                                return;
-                            }
-                            
-                            const drillDown = newCard.querySelector('.drill-down');
-                            const wasExpanded = newCard.classList.contains('expanded');
-                            
-                            // Close all other cards
-                            document.querySelectorAll('.thermometer-card.expanded').forEach(function(c) {
-                                c.classList.remove('expanded');
-                                const dd = c.querySelector('.drill-down');
-                                if (dd) dd.classList.remove('show');
-                            });
-                            
-                            // Toggle this card
-                            if (!wasExpanded && drillDown) {
-                                newCard.classList.add('expanded');
-                                drillDown.classList.add('show');
-                                console.log('Drill-down opened');
-                                
-                                // Animate team progress bars
-                                setTimeout(function() {
-                                    const teamCards = newCard.querySelectorAll('.team-card');
-                                    teamCards.forEach(function(teamCard, idx) {
-                                        setTimeout(function() {
-                                            const progressFill = teamCard.querySelector('.mini-progress-fill');
-                                            if (progressFill) {
-                                                const percentage = teamCard.querySelector('.team-stat-value').textContent.replace('%', '');
-                                                progressFill.style.width = percentage + '%';
-                                            }
-                                        }, idx * 200);
-                                    });
-                                    
-                                    // Attach team card click handlers for regular thermometers
-                                    teamCards.forEach(function(teamCard) {
-                                        teamCard.addEventListener('click', function(e) {
-                                            e.stopPropagation();
-                                            const repsList = teamCard.querySelector('.reps-list');
-                                            const wasExpanded = teamCard.classList.contains('expanded');
-                                            
-                                            // Close other team cards
-                                            teamCards.forEach(function(tc) {
-                                                if (tc !== teamCard) {
-                                                    tc.classList.remove('expanded');
-                                                    const rl = tc.querySelector('.reps-list');
-                                                    if (rl) rl.classList.remove('show');
-                                                }
-                                            });
-                                            
-                                            // Toggle this team card
-                                            if (!wasExpanded && repsList) {
-                                                teamCard.classList.add('expanded');
-                                                repsList.classList.add('show');
-                                            } else if (repsList) {
-                                                teamCard.classList.remove('expanded');
-                                                repsList.classList.remove('show');
-                                            }
-                                        });
-                                    });
-                                }, 100);
-                            }
-                        });
-                        
-                        // Attach close button handler
-                        const closeBtn = newCard.querySelector('.close-drill-down');
-                        if (closeBtn) {
-                            closeBtn.addEventListener('click', function(e) {
-                                e.stopPropagation();
-                                console.log('Close button clicked');
-                                newCard.classList.remove('expanded');
-                                const drillDown = newCard.querySelector('.drill-down');
-                                if (drillDown) drillDown.classList.remove('show');
-                            });
-                        }
-                        
-                        // Attach offering card handlers for support offerings
-                        const offeringCards = newCard.querySelectorAll('.offering-card');
-                        if (offeringCards.length > 0) {
-                            console.log('Found ' + offeringCards.length + ' offering cards');
-                            
-                            offeringCards.forEach(function(offeringCard) {
-                                offeringCard.addEventListener('click', function(e) {
-                                    e.stopPropagation();
-                                    console.log('Offering card clicked');
-                                    
-                                    const offeringsGrid = newCard.querySelector('.offerings-grid');
-                                    const teamsDrillDown = newCard.querySelector('.teams-drill-down');
-                                    const teamsGrid = newCard.querySelector('.teams-grid');
-                                    
-                                    // Hide offerings, show teams
-                                    offeringsGrid.style.display = 'none';
-                                    teamsDrillDown.style.display = 'block';
-                                    
-                                    // Get offering data from dashboard data
-                                    const offeringKey = offeringCard.dataset.offering;
-                                    const offeringTitle = offeringKey.split('-').map(function(word) {
-                                        return word.charAt(0).toUpperCase() + word.slice(1);
-                                    }).join(' ');
-                                    
-                                    // Update breadcrumb
-                                    const breadcrumbName = newCard.querySelector('.offering-name-breadcrumb');
-                                    if (breadcrumbName) breadcrumbName.textContent = offeringTitle;
-                                    
-                                    // Find the offering data
-                                    const cardTitle = newCard.querySelector('.card-title').textContent.toLowerCase().replace(/ /g, '-');
-                                    const offeringData = dashboardData.growth[cardTitle].offerings[offeringKey];
-                                    
-                                    // Populate teams
-                                    if (offeringData && offeringData.teams) {
-                                        teamsGrid.innerHTML = Object.entries(offeringData.teams).map(function([teamName, teamData]) {
-                                            const teamProgress = teamData.reps.reduce(function(sum, rep) { return sum + rep.progress; }, 0);
-                                            const avgProgress = (teamProgress / teamData.reps.length).toFixed(1);
-                                            const progressDollar = (teamData.revenue * (avgProgress / 100)).toFixed(0);
-                                            
-                                            return `
-                                                <div class="team-card" data-team="${teamName}">
-                                                    <div class="team-name">${teamName}</div>
-                                                    <div class="team-stats">
-                                                        <div class="team-stat">
-                                                            <div class="team-stat-label">Achievement:</div>
-                                                            <div class="team-stat-value">${teamData.percentage}%</div>
-                                                        </div>
-                                                        <div class="team-stat">
-                                                            <div class="team-stat-label">Revenue:</div>
-                                                            <div class="team-stat-value">$${teamData.revenue.toLocaleString()}</div>
-                                                        </div>
-                                                        <div class="team-stat">
-                                                            <div class="team-stat-label">Target:</div>
-                                                            <div class="team-stat-value">$${teamData.target.toLocaleString()}</div>
-                                                        </div>
-                                                        <div class="team-stat">
-                                                            <div class="team-stat-label">Progress:</div>
-                                                            <div class="team-stat-value" style="color: #24a148;">+$${parseInt(progressDollar).toLocaleString()} (+${avgProgress}%)</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mini-progress">
-                                                        <div class="mini-progress-fill" style="width: 0%; background: linear-gradient(to right, #da1e28, #ff832b, #42be65)"></div>
-                                                    </div>
-                                                    <div class="reps-list">
-                                                        <div class="reps-title">Team Members</div>
-                                                        ${teamData.reps.map(function(rep) {
-                                                            return `
-                                                                <div class="rep-item">
-                                                                    <div class="rep-name">${rep.name}</div>
-                                                                    <div class="rep-value">$${rep.revenue.toLocaleString()}</div>
-                                                                    <div class="rep-value">$${rep.target.toLocaleString()}</div>
-                                                                    <div class="rep-value">${rep.percentOfTarget}%</div>
-                                                                    <div class="rep-value">+${rep.progress.toFixed(1)}%</div>
-                                                                </div>
-                                                            `;
-                                                        }).join('')}
-                                                    </div>
-                                                </div>
-                                            `;
-                                        }).join('');
-                                        
-                                        // Animate team progress bars
-                                        setTimeout(function() {
-                                            const teamCards = teamsGrid.querySelectorAll('.team-card');
-                                            teamCards.forEach(function(tc, idx) {
-                                                setTimeout(function() {
-                                                    const progressFill = tc.querySelector('.mini-progress-fill');
-                                                    if (progressFill) {
-                                                        const percentage = tc.querySelector('.team-stat-value').textContent.replace('%', '');
-                                                        progressFill.style.width = percentage + '%';
-                                                    }
-                                                }, idx * 200);
-                                                
-                                                // Attach team card click handler
-                                                tc.addEventListener('click', function(e) {
-                                                    e.stopPropagation();
-                                                    const repsList = tc.querySelector('.reps-list');
-                                                    const wasExpanded = tc.classList.contains('expanded');
-                                                    
-                                                    // Close other teams
-                                                    teamCards.forEach(function(otherTc) {
-                                                        if (otherTc !== tc) {
-                                                            otherTc.classList.remove('expanded');
-                                                            otherTc.querySelector('.reps-list').classList.remove('show');
-                                                        }
-                                                    });
-                                                    
-                                                    if (!wasExpanded) {
-                                                        tc.classList.add('expanded');
-                                                        repsList.classList.add('show');
-                                                    } else {
-                                                        tc.classList.remove('expanded');
-                                                        repsList.classList.remove('show');
-                                                    }
-                                                });
-                                            });
-                                        }, 100);
-                                    }
-                                });
-                            });
-                            
-                            // Back to offerings button
-                            const backBtn = newCard.querySelector('.back-to-offerings');
-                            if (backBtn) {
-                                backBtn.addEventListener('click', function(e) {
-                                    e.stopPropagation();
-                                    const offeringsGrid = newCard.querySelector('.offerings-grid');
-                                    const teamsDrillDown = newCard.querySelector('.teams-drill-down');
-                                    offeringsGrid.style.display = 'grid';
-                                    teamsDrillDown.style.display = 'none';
-                                });
-                            }
-                            
-                            // Breadcrumb back
-                            const breadcrumbBack = newCard.querySelector('.breadcrumb-back');
-                            if (breadcrumbBack) {
-                                breadcrumbBack.addEventListener('click', function(e) {
-                                    e.stopPropagation();
-                                    const offeringsGrid = newCard.querySelector('.offerings-grid');
-                                    const teamsDrillDown = newCard.querySelector('.teams-drill-down');
-                                    offeringsGrid.style.display = 'grid';
-                                    teamsDrillDown.style.display = 'none';
-                                });
-                            }
-                        }
-                    });
-                    
-                    console.log('=== EVENT HANDLERS ATTACHED ===');
+                    attachEventHandlers();
                 }, 100);
             } else {
                 console.error('initializeDashboard function not found!');
+            }
+            
+            // Setup filter state
+            let originalData = JSON.parse(JSON.stringify(dashboardData)); // Deep copy of original data
+            let currentQuarter = 'all';
+            let currentRegion = 'all';
+            
+            // Setup quarter filter buttons
+            const quarterButtons = document.querySelectorAll('#quarter-filters .quarter-btn');
+            quarterButtons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    currentQuarter = btn.dataset.quarter;
+                    
+                    // Update active state
+                    quarterButtons.forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    btn.classList.add('active');
+                    
+                    console.log('Selected quarter:', currentQuarter);
+                    applyFilters();
+                });
+            });
+            
+            // Setup region filter buttons
+            const regionButtons = document.querySelectorAll('.region-btn');
+            regionButtons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    currentRegion = btn.dataset.region;
+                    
+                    // Update active state
+                    regionButtons.forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    btn.classList.add('active');
+                    
+                    console.log('Selected region:', currentRegion);
+                    applyFilters();
+                });
+            });
+            
+            // Function to apply both filters
+            function applyFilters() {
+                let filteredData = JSON.parse(JSON.stringify(originalData));
+                
+                // Apply quarter filter
+                if (currentQuarter !== 'all') {
+                    filteredData.growth = filterDataByQuarter(filteredData.growth, currentQuarter);
+                    filteredData.acv = filterDataByQuarter(filteredData.acv, currentQuarter);
+                }
+                
+                // Apply region filter
+                if (currentRegion !== 'all') {
+                    filteredData.growth = filterDataByRegion(filteredData.growth, currentRegion);
+                    filteredData.acv = filterDataByRegion(filteredData.acv, currentRegion);
+                }
+                
+                // Update dashboard data
+                dashboardData.growth = filteredData.growth;
+                dashboardData.acv = filteredData.acv;
+                
+                // Re-initialize dashboard with filtered data
+                document.getElementById('growth-row').innerHTML = '';
+                document.getElementById('acv-row').innerHTML = '';
+                initializeDashboard();
+                
+                // Re-attach event handlers after re-initialization
+                setTimeout(function() {
+                    attachEventHandlers();
+                }, 100);
+            }
+            
+            // Function to filter data by region
+            function filterDataByRegion(categoryData, region) {
+                const filtered = {};
+                
+                Object.keys(categoryData).forEach(function(subcategoryKey) {
+                    const subcategory = categoryData[subcategoryKey];
+                    filtered[subcategoryKey] = JSON.parse(JSON.stringify(subcategory));
+                    
+                    if (subcategory.hasSubOfferings && subcategory.offerings) {
+                        // Handle support offerings with sub-offerings
+                        Object.keys(subcategory.offerings).forEach(function(offeringKey) {
+                            const offering = subcategory.offerings[offeringKey];
+                            if (offering.teams) {
+                                Object.keys(offering.teams).forEach(function(teamKey) {
+                                    const team = offering.teams[teamKey];
+                                    team.reps = team.reps.filter(function(rep) {
+                                        return rep.region === region;
+                                    });
+                                });
+                            }
+                        });
+                    } else if (subcategory.teams) {
+                        // Handle regular subcategories
+                        Object.keys(subcategory.teams).forEach(function(teamKey) {
+                            const team = subcategory.teams[teamKey];
+                            team.reps = team.reps.filter(function(rep) {
+                                return rep.region === region;
+                            });
+                        });
+                    }
+                });
+                
+                return filtered;
+            }
+            
+            // Function to filter data by quarter
+            function filterDataByQuarter(categoryData, quarter) {
+                const filtered = {};
+                
+                Object.keys(categoryData).forEach(function(subcategoryKey) {
+                    const subcategory = categoryData[subcategoryKey];
+                    filtered[subcategoryKey] = JSON.parse(JSON.stringify(subcategory));
+                    
+                    if (subcategory.hasSubOfferings && subcategory.offerings) {
+                        // Handle support offerings with sub-offerings
+                        Object.keys(subcategory.offerings).forEach(function(offeringKey) {
+                            const offering = subcategory.offerings[offeringKey];
+                            if (offering.teams) {
+                                Object.keys(offering.teams).forEach(function(teamKey) {
+                                    const team = offering.teams[teamKey];
+                                    team.reps = team.reps.filter(function(rep) {
+                                        return rep.quarter === quarter;
+                                    });
+                                });
+                            }
+                        });
+                    } else if (subcategory.teams) {
+                        // Handle regular subcategories
+                        Object.keys(subcategory.teams).forEach(function(teamKey) {
+                            const team = subcategory.teams[teamKey];
+                            team.reps = team.reps.filter(function(rep) {
+                                return rep.quarter === quarter;
+                            });
+                        });
+                    }
+                });
+                
+                return filtered;
+            }
+            
+            // Function to attach event handlers (extracted for reuse)
+            function attachEventHandlers() {
+                // Animate message badges
+                const badges = document.querySelectorAll('.message-badge');
+                badges.forEach(function(badge) {
+                    setTimeout(function() {
+                        badge.classList.add('show');
+                    }, 2600);
+                });
+                
+                const cards = document.querySelectorAll('.thermometer-card');
+                console.log('Found ' + cards.length + ' thermometer cards');
+                
+                cards.forEach(function(card, index) {
+                    console.log('Attaching click handler to card ' + (index + 1));
+                    
+                    // Remove any existing listeners
+                    const newCard = card.cloneNode(true);
+                    card.parentNode.replaceChild(newCard, card);
+                    
+                    // Attach new click handler
+                    newCard.addEventListener('click', function(e) {
+                        console.log('Card clicked!', e.target);
+                        
+                        // Don't trigger if clicking inside drill-down
+                        if (e.target.closest('.drill-down')) {
+                            console.log('Clicked inside drill-down, ignoring');
+                            return;
+                        }
+                        
+                        const drillDown = newCard.querySelector('.drill-down');
+                        const wasExpanded = newCard.classList.contains('expanded');
+                        
+                        // Close all other cards
+                        document.querySelectorAll('.thermometer-card.expanded').forEach(function(c) {
+                            c.classList.remove('expanded');
+                            const dd = c.querySelector('.drill-down');
+                            if (dd) dd.classList.remove('show');
+                        });
+                        
+                        // Toggle this card
+                        if (!wasExpanded && drillDown) {
+                            newCard.classList.add('expanded');
+                            drillDown.classList.add('show');
+                            console.log('Drill-down opened');
+                            
+                            // Animate team progress bars
+                            setTimeout(function() {
+                                const teamCards = newCard.querySelectorAll('.team-card');
+                                teamCards.forEach(function(teamCard, idx) {
+                                    setTimeout(function() {
+                                        const progressFill = teamCard.querySelector('.mini-progress-fill');
+                                        if (progressFill) {
+                                            const percentage = teamCard.querySelector('.team-stat-value').textContent.replace('%', '');
+                                            progressFill.style.width = percentage + '%';
+                                        }
+                                    }, idx * 200);
+                                });
+                                
+                                // Attach team card click handlers for regular thermometers
+                                teamCards.forEach(function(teamCard) {
+                                    teamCard.addEventListener('click', function(e) {
+                                        e.stopPropagation();
+                                        const repsList = teamCard.querySelector('.reps-list');
+                                        const wasExpanded = teamCard.classList.contains('expanded');
+                                        
+                                        // Close other team cards
+                                        teamCards.forEach(function(tc) {
+                                            if (tc !== teamCard) {
+                                                tc.classList.remove('expanded');
+                                                const rl = tc.querySelector('.reps-list');
+                                                if (rl) rl.classList.remove('show');
+                                            }
+                                        });
+                                        
+                                        // Toggle this team card
+                                        if (!wasExpanded && repsList) {
+                                            teamCard.classList.add('expanded');
+                                            repsList.classList.add('show');
+                                        } else if (repsList) {
+                                            teamCard.classList.remove('expanded');
+                                            repsList.classList.remove('show');
+                                        }
+                                    });
+                                });
+                            }, 100);
+                        }
+                    });
+                    
+                    // Attach close button handler
+                    const closeBtn = newCard.querySelector('.close-drill-down');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            console.log('Close button clicked');
+                            newCard.classList.remove('expanded');
+                            const drillDown = newCard.querySelector('.drill-down');
+                            if (drillDown) drillDown.classList.remove('show');
+                        });
+                    }
+                    
+                    // Attach offering card handlers for support offerings
+                    const offeringCards = newCard.querySelectorAll('.offering-card');
+                    if (offeringCards.length > 0) {
+                        console.log('Found ' + offeringCards.length + ' offering cards');
+                        
+                        offeringCards.forEach(function(offeringCard) {
+                            offeringCard.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                console.log('Offering card clicked');
+                                
+                                const offeringsGrid = newCard.querySelector('.offerings-grid');
+                                const teamsDrillDown = newCard.querySelector('.teams-drill-down');
+                                const teamsGrid = newCard.querySelector('.teams-grid');
+                                
+                                // Hide offerings, show teams
+                                offeringsGrid.style.display = 'none';
+                                teamsDrillDown.style.display = 'block';
+                                
+                                // Get offering data from dashboard data
+                                const offeringKey = offeringCard.dataset.offering;
+                                const offeringTitle = offeringKey.split('-').map(function(word) {
+                                    return word.charAt(0).toUpperCase() + word.slice(1);
+                                }).join(' ');
+                                
+                                // Update breadcrumb
+                                const breadcrumbName = newCard.querySelector('.offering-name-breadcrumb');
+                                if (breadcrumbName) breadcrumbName.textContent = offeringTitle;
+                                
+                                // Find the offering data
+                                const cardTitle = newCard.querySelector('.card-title').textContent.toLowerCase().replace(/ /g, '-');
+                                const offeringData = dashboardData.growth[cardTitle].offerings[offeringKey];
+                                
+                                // Populate teams
+                                if (offeringData && offeringData.teams) {
+                                    teamsGrid.innerHTML = Object.entries(offeringData.teams).map(function([teamName, teamData]) {
+                                        const teamProgress = teamData.reps.reduce(function(sum, rep) { return sum + rep.progress; }, 0);
+                                        const avgProgress = (teamProgress / teamData.reps.length).toFixed(1);
+                                        const progressDollar = (teamData.revenue * (avgProgress / 100)).toFixed(0);
+                                        
+                                        return `
+                                            <div class="team-card" data-team="${teamName}">
+                                                <div class="team-name">${teamName}</div>
+                                                <div class="team-stats">
+                                                    <div class="team-stat">
+                                                        <div class="team-stat-label">Achievement:</div>
+                                                        <div class="team-stat-value">${teamData.percentage}%</div>
+                                                    </div>
+                                                    <div class="team-stat">
+                                                        <div class="team-stat-label">Achievement ($):</div>
+                                                        <div class="team-stat-value">$${teamData.revenue.toLocaleString()}</div>
+                                                    </div>
+                                                    <div class="team-stat">
+                                                        <div class="team-stat-label">Target ($):</div>
+                                                        <div class="team-stat-value">$${teamData.target.toLocaleString()}</div>
+                                                    </div>
+                                                    <div class="team-stat">
+                                                        <div class="team-stat-label">Progress:</div>
+                                                        <div class="team-stat-value" style="color: #24a148;">+$${parseInt(progressDollar).toLocaleString()} (+${avgProgress}%)</div>
+                                                    </div>
+                                                </div>
+                                                <div class="mini-progress">
+                                                    <div class="mini-progress-fill" style="width: 0%; background: linear-gradient(to right, #da1e28, #ff832b, #42be65)"></div>
+                                                </div>
+                                                <div class="reps-list">
+                                                    <div class="reps-title">Team Members</div>
+                                                    ${teamData.reps.map(function(rep) {
+                                                        return `
+                                                            <div class="rep-item">
+                                                                <div class="rep-name">${rep.name}</div>
+                                                                <div class="rep-value">${rep.percentOfTarget}%</div>
+                                                                <div class="rep-value">+${rep.progress.toFixed(1)}%</div>
+                                                            </div>
+                                                        `;
+                                                    }).join('')}
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('');
+                                    
+                                    // Animate team progress bars
+                                    setTimeout(function() {
+                                        const teamCards = teamsGrid.querySelectorAll('.team-card');
+                                        teamCards.forEach(function(tc, idx) {
+                                            setTimeout(function() {
+                                                const progressFill = tc.querySelector('.mini-progress-fill');
+                                                if (progressFill) {
+                                                    const percentage = tc.querySelector('.team-stat-value').textContent.replace('%', '');
+                                                    progressFill.style.width = percentage + '%';
+                                                }
+                                            }, idx * 200);
+                                            
+                                            // Attach team card click handler
+                                            tc.addEventListener('click', function(e) {
+                                                e.stopPropagation();
+                                                const repsList = tc.querySelector('.reps-list');
+                                                const wasExpanded = tc.classList.contains('expanded');
+                                                
+                                                // Close other teams
+                                                teamCards.forEach(function(otherTc) {
+                                                    if (otherTc !== tc) {
+                                                        otherTc.classList.remove('expanded');
+                                                        otherTc.querySelector('.reps-list').classList.remove('show');
+                                                    }
+                                                });
+                                                
+                                                if (!wasExpanded) {
+                                                    tc.classList.add('expanded');
+                                                    repsList.classList.add('show');
+                                                } else {
+                                                    tc.classList.remove('expanded');
+                                                    repsList.classList.remove('show');
+                                                }
+                                            });
+                                        });
+                                    }, 100);
+                                }
+                            });
+                        });
+                        
+                        // Back to offerings button
+                        const backBtn = newCard.querySelector('.back-to-offerings');
+                        if (backBtn) {
+                            backBtn.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                const offeringsGrid = newCard.querySelector('.offerings-grid');
+                                const teamsDrillDown = newCard.querySelector('.teams-drill-down');
+                                offeringsGrid.style.display = 'grid';
+                                teamsDrillDown.style.display = 'none';
+                            });
+                        }
+                        
+                        // Breadcrumb back
+                        const breadcrumbBack = newCard.querySelector('.breadcrumb-back');
+                        if (breadcrumbBack) {
+                            breadcrumbBack.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                const offeringsGrid = newCard.querySelector('.offerings-grid');
+                                const teamsDrillDown = newCard.querySelector('.teams-drill-down');
+                                offeringsGrid.style.display = 'grid';
+                                teamsDrillDown.style.display = 'none';
+                            });
+                        }
+                    }
+                });
+                
+                console.log('=== EVENT HANDLERS ATTACHED ===');
             }
         });
     </script>
