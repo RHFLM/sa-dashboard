@@ -249,9 +249,22 @@
                 }, 100);
             }
             
-            // Function to filter data by region
+            // Map region button values to team name prefixes
+            const regionPrefixMap = {
+                'ncee':   'NCEE',
+                'dach':   'DACH',
+                'france': 'France',
+                'mea':    'MEA',
+                'spgi':   'SPGI',
+                'italy':  'Italy',
+                'uki':    'UKI'
+            };
+
+            // Function to filter data by region — matches team name prefix e.g. "UKI — Manager"
             function filterDataByRegion(categoryData, region) {
                 const filtered = {};
+                const prefix = regionPrefixMap[region];
+                if (!prefix) return categoryData;
                 
                 Object.keys(categoryData).forEach(function(subcategoryKey) {
                     const subcategory = categoryData[subcategoryKey];
@@ -260,24 +273,36 @@
                     if (subcategory.hasSubOfferings && subcategory.offerings) {
                         // Handle support offerings with sub-offerings
                         Object.keys(subcategory.offerings).forEach(function(offeringKey) {
-                            const offering = subcategory.offerings[offeringKey];
+                            const offering = filtered[subcategoryKey].offerings[offeringKey];
                             if (offering.teams) {
+                                const matchingTeams = {};
                                 Object.keys(offering.teams).forEach(function(teamKey) {
-                                    const team = offering.teams[teamKey];
-                                    team.reps = team.reps.filter(function(rep) {
-                                        return rep.region === region;
-                                    });
+                                    if (teamKey.startsWith(prefix + ' —') || teamKey.startsWith(prefix + ' -')) {
+                                        matchingTeams[teamKey] = offering.teams[teamKey];
+                                    }
                                 });
+                                offering.teams = matchingTeams;
                             }
                         });
                     } else if (subcategory.teams) {
-                        // Handle regular subcategories
+                        // Handle regular subcategories — filter to only teams matching the region prefix
+                        const matchingTeams = {};
                         Object.keys(subcategory.teams).forEach(function(teamKey) {
-                            const team = subcategory.teams[teamKey];
-                            team.reps = team.reps.filter(function(rep) {
-                                return rep.region === region;
-                            });
+                            if (teamKey.startsWith(prefix + ' —') || teamKey.startsWith(prefix + ' -')) {
+                                matchingTeams[teamKey] = filtered[subcategoryKey].teams[teamKey];
+                            }
                         });
+                        filtered[subcategoryKey].teams = matchingTeams;
+                        // Recalculate percentage and revenue for filtered teams
+                        var totalRev = 0;
+                        var totalTgt = 0;
+                        Object.values(matchingTeams).forEach(function(t) {
+                            totalRev += t.revenue || 0;
+                            totalTgt += t.target || 0;
+                        });
+                        if (totalTgt > 0) {
+                            filtered[subcategoryKey].percentage = Math.round((totalRev / totalTgt) * 100);
+                        }
                     }
                 });
                 
