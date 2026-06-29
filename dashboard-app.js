@@ -198,21 +198,31 @@ function createThermometerColumn(category, subcategory, data) {
         word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
 
-    const benchmark = getCurrentBenchmark(data.percentage);
-    const fillColor = getColor(data.percentage);
-    const bulbColor = getBulbColor(data.percentage);
-    
-    // Calculate overall progress from topProgress data
-    const totalProgress = data.topProgress ? data.topProgress.reduce((sum, rep) => {
-        return sum + (rep.current - rep.previousWeek);
-    }, 0) : 0;
-    const progressPercent = data.target > 0 ? ((totalProgress / data.target) * 100).toFixed(1) : 0;
-    
+    // --- Derive all numbers live from filtered teams data ---
+    const allReps = [];
+    let totalRevenue = 0;
+    let totalTarget = 0;
+    Object.entries(data.teams || {}).forEach(([, teamData]) => {
+        totalRevenue += teamData.revenue || 0;
+        totalTarget  += teamData.target  || 0;
+        (teamData.reps || []).forEach(rep => allReps.push({ ...rep, teamTarget: teamData.target }));
+    });
+
+    const livePercentage = totalTarget > 0 ? Math.min(Math.round((totalRevenue / totalTarget) * 100), 150) : data.percentage;
+    const benchmark  = getCurrentBenchmark(livePercentage);
+    const fillColor  = getColor(livePercentage);
+    const bulbColor  = getBulbColor(livePercentage);
+
+    // Top 5 by revenue from filtered reps
+    const topByRevenue = [...allReps].sort((a, b) => b.revenue - a.revenue).slice(0, 5);
+    // Top 5 by ACV (same field = revenue after filter remapping)
+    const topByProgress = [...allReps].sort((a, b) => b.revenue - a.revenue).slice(0, 5);
+
     column.innerHTML = `
         <div class="thermometer-card">
             <div class="card-title">${title}</div>
             <div class="card-subtitle" style="text-align: center; color: #24a148; font-weight: 600; font-size: 0.9rem; margin-bottom: 10px;">
-                Progress: +$${totalProgress.toLocaleString()} (+${progressPercent}%)
+                Won ACV: $${Math.round(totalRevenue).toLocaleString()} &nbsp;/&nbsp; Target: $${Math.round(totalTarget).toLocaleString()}
             </div>
             <div class="thermometer-container">
                 <div class="thermometer-wrapper">
@@ -227,7 +237,7 @@ function createThermometerColumn(category, subcategory, data) {
                     <div class="thermometer">
                         <div class="thermometer-fill" style="height: 0%; background: ${fillColor};"></div>
                         <div class="thermometer-bulb" style="background: ${bulbColor};">
-                            <div class="bulb-percentage">${data.percentage}%</div>
+                            <div class="bulb-percentage">${livePercentage}%</div>
                         </div>
                         ${benchmark ? `<div class="message-badge" data-level="${benchmark.level}" style="bottom: ${benchmark.level}%; background: ${fillColor};">${benchmark.message}</div>` : ''}
                     </div>
@@ -236,46 +246,40 @@ function createThermometerColumn(category, subcategory, data) {
             <div class="drill-down">
             <div class="drill-down-title">Team Performance Breakdown</div>
             <div class="teams-grid">
-                ${Object.entries(data.teams).map(([teamName, teamData]) => {
-                    // Calculate team progress from reps
-                    const teamProgress = teamData.reps.reduce((sum, rep) => sum + rep.progress, 0);
-                    const avgProgress = (teamProgress / teamData.reps.length).toFixed(1);
-                    const progressDollar = (teamData.revenue * (avgProgress / 100)).toFixed(0);
-                    
+                ${Object.entries(data.teams || {}).map(([teamName, teamData]) => {
+                    const teamPct = teamData.target > 0 ? Math.round((teamData.revenue / teamData.target) * 100) : teamData.percentage;
                     return `
                     <div class="team-card" data-team="${teamName}">
                         <div class="team-name">${teamName}</div>
                         <div class="team-stats">
                             <div class="team-stat">
                                 <div class="team-stat-label">Achievement:</div>
-                                <div class="team-stat-value">${teamData.percentage}%</div>
+                                <div class="team-stat-value">${teamPct}%</div>
                             </div>
                             <div class="team-stat">
-                                <div class="team-stat-label">Revenue:</div>
-                                <div class="team-stat-value">$${teamData.revenue.toLocaleString()}</div>
+                                <div class="team-stat-label">Won ACV:</div>
+                                <div class="team-stat-value">$${Math.round(teamData.revenue).toLocaleString()}</div>
                             </div>
                             <div class="team-stat">
                                 <div class="team-stat-label">Target:</div>
-                                <div class="team-stat-value">$${teamData.target.toLocaleString()}</div>
+                                <div class="team-stat-value">$${Math.round(teamData.target).toLocaleString()}</div>
                             </div>
                             <div class="team-stat">
-                                <div class="team-stat-label">Progress:</div>
-                                <div class="team-stat-value" style="color: #24a148;">+$${parseInt(progressDollar).toLocaleString()} (+${avgProgress}%)</div>
+                                <div class="team-stat-label">Remaining:</div>
+                                <div class="team-stat-value" style="color: #da1e28;">$${Math.max(0, Math.round(teamData.target - teamData.revenue)).toLocaleString()}</div>
                             </div>
                         </div>
                         <div class="mini-progress">
-                            <div class="mini-progress-fill" style="width: 0%; background: ${getColor(teamData.percentage)}"></div>
+                            <div class="mini-progress-fill" style="width: 0%; background: ${getColor(teamPct)}"></div>
                         </div>
-                        
                         <div class="reps-list">
                             <div class="reps-title">Team Members</div>
-                            ${teamData.reps.map(rep => `
+                            ${(teamData.reps || []).map(rep => `
                                 <div class="rep-item">
                                     <div class="rep-name">${rep.name}</div>
-                                    <div class="rep-value">$${rep.revenue.toLocaleString()}</div>
-                                    <div class="rep-value">$${rep.target.toLocaleString()}</div>
+                                    <div class="rep-value">$${Math.round(rep.revenue).toLocaleString()}</div>
+                                    <div class="rep-value">$${Math.round(rep.target).toLocaleString()}</div>
                                     <div class="rep-value">${rep.percentOfTarget}%</div>
-                                    <div class="rep-value">+${rep.progress.toFixed(1)}%</div>
                                     <div class="rep-status ${getStatusClass(rep.percentOfTarget)}">${getStatusText(rep.percentOfTarget)}</div>
                                 </div>
                             `).join('')}
@@ -289,50 +293,47 @@ function createThermometerColumn(category, subcategory, data) {
         </div>
         
         <div class="info-box">
-            <div class="info-box-title">Top 5 Revenue Reps</div>
+            <div class="info-box-title">Top 5 by Won ACV</div>
             <table class="info-table">
                 <thead>
                     <tr>
                         <th>Rep Name</th>
-                        <th>Revenue</th>
+                        <th>Won ACV</th>
                         <th>% of Target</th>
                     </tr>
                 </thead>
                 <tbody>
-                    ${data.topRevenue.map(rep => `
+                    ${topByRevenue.length > 0 ? topByRevenue.map(rep => `
                         <tr>
                             <td>${rep.name}</td>
-                            <td>$${rep.revenue.toLocaleString()}</td>
+                            <td>$${Math.round(rep.revenue).toLocaleString()}</td>
                             <td>${rep.percentOfTarget}%</td>
                         </tr>
-                    `).join('')}
+                    `).join('') : '<tr><td colspan="3" style="text-align:center;color:#888">No data for selected filter</td></tr>'}
                 </tbody>
             </table>
         </div>
         
         <div class="info-box">
-            <div class="info-box-title">Top 5 Progress From Last Week</div>
+            <div class="info-box-title">Top 5 by Won ACV (Ranked)</div>
             <table class="info-table">
                 <thead>
                     <tr>
                         <th>Rep Name</th>
-                        <th>Difference</th>
-                        <th>% of Target</th>
+                        <th>Won ACV</th>
+                        <th>% of Team Target</th>
                     </tr>
                 </thead>
                 <tbody>
-                    ${data.topProgress.map(rep => {
-                        const difference = rep.current - rep.previousWeek;
-                        const percentOfTarget = ((difference / data.target) * 100).toFixed(1);
+                    ${topByProgress.length > 0 ? topByProgress.map(rep => {
+                        const pctOfTarget = rep.teamTarget > 0 ? ((rep.revenue / rep.teamTarget) * 100).toFixed(1) : '0.0';
                         return `
                         <tr>
                             <td>${rep.name}</td>
-                            <td style="color: ${difference >= 0 ? '#24a148' : '#da1e28'}; font-weight: 600;">
-                                ${difference >= 0 ? '+' : ''}$${difference.toLocaleString()}
-                            </td>
-                            <td>${percentOfTarget}%</td>
+                            <td style="color: #24a148; font-weight: 600;">$${Math.round(rep.revenue).toLocaleString()}</td>
+                            <td>${pctOfTarget}%</td>
                         </tr>
-                    `}).join('')}
+                    `}).join('') : '<tr><td colspan="3" style="text-align:center;color:#888">No data for selected filter</td></tr>'}
                 </tbody>
             </table>
         </div>
