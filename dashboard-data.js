@@ -1,442 +1,527 @@
 // ============================================
 // DATA CONFIGURATION - Populated from CEDP ISC Data (Won deals, 2026FY)
 // Last extracted: 2026-06-23
+// Quarter ranges: Q1=Jan-Mar, Q2=Apr-Jun, Q3=Jul-Sep, Q4=Oct-Dec
 // ============================================
 const dashboardData = {
     growth: {
         upgrade: {
-            percentage: Math.round((7935268 / 12000000) * 100),
+            percentage: 66,
             target: 12000000,
             current: 7935268,
             topRevenue: [
-                { name: 'Danilo Giordano',       revenue: 1495567, percentOfTarget: Math.round((1495567/400000)*100) },
-                { name: 'Eoin Macentee',          revenue: 2579000, percentOfTarget: Math.round((2579000/400000)*100) },
-                { name: 'Catherine Hoey',         revenue: 671963,  percentOfTarget: Math.round((671963/400000)*100)  },
-                { name: 'Mohit Kapoor',           revenue: 297000,  percentOfTarget: Math.round((297000/400000)*100)  },
-                { name: 'Pawel Herda',            revenue: 448992,  percentOfTarget: Math.round((448992/400000)*100)  }
+                { name: 'Eoin Macentee', revenue: 2579000, percentOfTarget: 21 },
+                { name: 'Danilo Giordano', revenue: 1495567, percentOfTarget: 12 },
+                { name: 'Catherine Hoey', revenue: 671963, percentOfTarget: 6 },
+                { name: 'Nohelia Vargas Lopez', revenue: 515120, percentOfTarget: 4 },
+                { name: 'Pawel Herda', revenue: 448992, percentOfTarget: 4 }
             ],
             topProgress: [
-                { name: 'Eoin Macentee',          previousWeek: 0, current: 2579000, progress: 100, percentOfTarget: Math.round((2579000/400000)*100) },
-                { name: 'Danilo Giordano',        previousWeek: 0, current: 1495567, progress: 100, percentOfTarget: Math.round((1495567/400000)*100) },
-                { name: 'Pawel Herda',            previousWeek: 0, current: 448992,  progress: 100, percentOfTarget: Math.round((448992/400000)*100)  },
-                { name: 'Catherine Hoey',         previousWeek: 0, current: 671963,  progress: 100, percentOfTarget: Math.round((671963/400000)*100)  },
-                { name: 'Ouafaa Lebbat',          previousWeek: 0, current: 314424,  progress: 100, percentOfTarget: Math.round((314424/400000)*100)  }
+                { name: 'Eoin Macentee', previousWeek: 0, current: 2579000, progress: 2579000, percentOfTarget: 21 },
+                { name: 'Danilo Giordano', previousWeek: 0, current: 1495567, progress: 1495567, percentOfTarget: 12 },
+                { name: 'Catherine Hoey', previousWeek: 0, current: 671963, progress: 671963, percentOfTarget: 6 },
+                { name: 'Nohelia Vargas Lopez', previousWeek: 0, current: 515120, progress: 515120, percentOfTarget: 4 },
+                { name: 'Pawel Herda', previousWeek: 0, current: 448992, progress: 448992, percentOfTarget: 4 }
             ],
             teams: {
-                'UKI — Malin Manning': {
-                    percentage: Math.round((1170054/2000000)*100),
-                    revenue: 1170054,
-                    target: 2000000,
-                    reps: [
-                        { name: 'Catherine Hoey',  revenue: 671963, target: 400000, percentOfTarget: Math.round((671963/400000)*100), progress: 100, status: 'excellent' },
-                        { name: 'Mohit Kapoor',    revenue: 297000, target: 400000, percentOfTarget: Math.round((297000/400000)*100), progress: 100, status: 'good'      },
-                        { name: 'Clifford Codd',   revenue: 201091, target: 400000, percentOfTarget: Math.round((201091/400000)*100), progress: 100, status: 'good'      }
-                    ]
-                },
-                'DACH — Data Withheld Mgr': {
-                    percentage: Math.round((2620837/3000000)*100),
+                'DACH — Data Withheld Data Withheld': {
+                    percentage: 53,
                     revenue: 2620837,
-                    target: 3000000,
+                    target: 4950000,
+                    market: 'dach',
                     reps: [
-                        { name: 'Eoin Macentee',          revenue: 2579000, target: 2000000, percentOfTarget: Math.round((2579000/2000000)*100), progress: 100, status: 'excellent' },
-                        { name: 'Data Withheld Rep',       revenue: 41837,   target: 500000,  percentOfTarget: Math.round((41837/500000)*100),    progress: 100, status: 'good'      }
-                    ]
-                },
-                'DACH — Bettina Curran': {
-                    percentage: Math.round((486424/1000000)*100),
-                    revenue: 486424,
-                    target: 1000000,
-                    reps: [
-                        { name: 'Ouafaa Lebbat',     revenue: 314424, target: 600000, percentOfTarget: Math.round((314424/600000)*100), progress: 100, status: 'good' },
-                        { name: 'Norbert Fehrenbach', revenue: 172000, target: 400000, percentOfTarget: Math.round((172000/400000)*100), progress: 100, status: 'good' }
-                    ]
-                },
-                'DACH — David Linnie': {
-                    percentage: Math.round((448992/800000)*100),
-                    revenue: 448992,
-                    target: 800000,
-                    reps: [
-                        { name: 'Pawel Herda', revenue: 448992, target: 800000, percentOfTarget: Math.round((448992/800000)*100), progress: 100, status: 'good' }
+                        { name: 'Eoin Macentee', revenue: 2579000, target: 5360000, percentOfTarget: 48, progress: 2579000, region: 'dach', q1: 2579000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Data Withheld Data Withheld', revenue: 41837, target: 90000, percentOfTarget: 46, progress: 41837, region: 'dach', q1: 0, q2: 41837, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'Italy — Luca Cialdella': {
-                    percentage: Math.round((1495567/2000000)*100),
+                    percentage: 52,
                     revenue: 1495567,
-                    target: 2000000,
+                    target: 2850000,
+                    market: 'italy',
                     reps: [
-                        { name: 'Danilo Giordano', revenue: 1495567, target: 2000000, percentOfTarget: Math.round((1495567/2000000)*100), progress: 100, status: 'good' }
+                        { name: 'Danilo Giordano', revenue: 1495567, target: 3140000, percentOfTarget: 48, progress: 1495567, region: 'italy', q1: 1495567, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'UKI — Malin Manning': {
+                    percentage: 53,
+                    revenue: 1170054,
+                    target: 2200000,
+                    market: 'uki',
+                    reps: [
+                        { name: 'Catherine Hoey', revenue: 671963, target: 1390000, percentOfTarget: 48, progress: 671963, region: 'uki', q1: 671963, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Mohit Kapoor', revenue: 297000, target: 610000, percentOfTarget: 49, progress: 297000, region: 'uki', q1: 0, q2: 297000, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Clifford Codd', revenue: 201091, target: 420000, percentOfTarget: 48, progress: 201091, region: 'uki', q1: 201091, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'NCEE — Ryan Hughes': {
-                    percentage: Math.round((515120/800000)*100),
+                    percentage: 54,
                     revenue: 515120,
-                    target: 800000,
+                    target: 950000,
+                    market: 'ncee',
                     reps: [
-                        { name: 'Nohelia Vargas Lopez', revenue: 515120, target: 800000, percentOfTarget: Math.round((515120/800000)*100), progress: 100, status: 'good' }
+                        { name: 'Nohelia Vargas Lopez', revenue: 515120, target: 1050000, percentOfTarget: 49, progress: 515120, region: 'ncee', q1: 515120, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
-                'NCEE — Sofie Van Acker': {
-                    percentage: Math.round((261636/500000)*100),
-                    revenue: 261636,
-                    target: 500000,
+                'DACH — BETTINA CURRAN': {
+                    percentage: 54,
+                    revenue: 486424,
+                    target: 900000,
+                    market: 'dach',
                     reps: [
-                        { name: 'Urska Bricelj', revenue: 261636, target: 500000, percentOfTarget: Math.round((261636/500000)*100), progress: 100, status: 'good' }
+                        { name: 'Ouafaa Lebbat', revenue: 314424, target: 640000, percentOfTarget: 49, progress: 314424, region: 'dach', q1: 0, q2: 314424, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Norbert Fehrenbach', revenue: 172000, target: 350000, percentOfTarget: 49, progress: 172000, region: 'dach', q1: 172000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
-                'NCEE — Emilie Peloille': {
-                    percentage: Math.round((187000/400000)*100),
-                    revenue: 187000,
-                    target: 400000,
+                'DACH — David Linnie': {
+                    percentage: 53,
+                    revenue: 448992,
+                    target: 850000,
+                    market: 'dach',
                     reps: [
-                        { name: 'Beatriz Donnelly', revenue: 187000, target: 400000, percentOfTarget: Math.round((187000/400000)*100), progress: 100, status: 'good' }
+                        { name: 'Pawel Herda', revenue: 448992, target: 940000, percentOfTarget: 48, progress: 448992, region: 'dach', q1: 0, q2: 448992, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'MEA — Mohamed El-hussein': {
-                    percentage: Math.round((400000/600000)*100),
+                    percentage: 53,
                     revenue: 400000,
-                    target: 600000,
+                    target: 750000,
+                    market: 'mea',
                     reps: [
-                        { name: 'Younes Meskini', revenue: 400000, target: 600000, percentOfTarget: Math.round((400000/600000)*100), progress: 100, status: 'good' }
+                        { name: 'Younes Meskini', revenue: 400000, target: 830000, percentOfTarget: 48, progress: 400000, region: 'mea', q1: 400000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'NCEE — Sofie Van Acker': {
+                    percentage: 52,
+                    revenue: 261636,
+                    target: 500000,
+                    market: 'ncee',
+                    reps: [
+                        { name: 'Urska Bricelj', revenue: 261636, target: 550000, percentOfTarget: 48, progress: 261636, region: 'ncee', q1: 187500, q2: 74136, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'MEA — Mennatullah Abdel-Hamid': {
-                    percentage: Math.round((210139/400000)*100),
+                    percentage: 53,
                     revenue: 210139,
                     target: 400000,
+                    market: 'mea',
                     reps: [
-                        { name: 'Amina Khomsi Zobkhi', revenue: 210139, target: 400000, percentOfTarget: Math.round((210139/400000)*100), progress: 100, status: 'good' }
+                        { name: 'Amina Khomsi Zobkhi', revenue: 210139, target: 440000, percentOfTarget: 48, progress: 210139, region: 'mea', q1: 210139, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'NCEE — Emilie Peloille': {
+                    percentage: 53,
+                    revenue: 187000,
+                    target: 350000,
+                    market: 'ncee',
+                    reps: [
+                        { name: 'Beatriz Donnelly', revenue: 187000, target: 390000, percentOfTarget: 48, progress: 187000, region: 'ncee', q1: 0, q2: 187000, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'France — Gregori Lafont': {
-                    percentage: Math.round((64023/200000)*100),
+                    percentage: 64,
                     revenue: 64023,
-                    target: 200000,
+                    target: 100000,
+                    market: 'france',
                     reps: [
-                        { name: 'Charlene Charrier', revenue: 64023, target: 200000, percentOfTarget: Math.round((64023/200000)*100), progress: 100, status: 'good' }
+                        { name: 'Charlene Charrier', revenue: 64023, target: 110000, percentOfTarget: 58, progress: 64023, region: 'france', q1: 64023, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'NCEE — Anne-sophie Verdonck': {
+                    percentage: 39,
+                    revenue: 39000,
+                    target: 100000,
+                    market: 'ncee',
+                    reps: [
+                        { name: 'Bart Dekempe', revenue: 39000, target: 110000, percentOfTarget: 35, progress: 39000, region: 'ncee', q1: 39000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'SPGI — Isabel Sanz': {
-                    percentage: Math.round((36476/200000)*100),
+                    percentage: 36,
                     revenue: 36476,
-                    target: 200000,
+                    target: 100000,
+                    market: 'spgi',
                     reps: [
-                        { name: 'Vera Costa', revenue: 36476, target: 200000, percentOfTarget: Math.round((36476/200000)*100), progress: 100, status: 'good' }
+                        { name: 'Vera Costa', revenue: 36476, target: 110000, percentOfTarget: 33, progress: 36476, region: 'spgi', q1: 36476, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 }
             }
         },
         'trade-up': {
-            percentage: Math.round((7822438 / 12000000) * 100),
+            percentage: 65,
             target: 12000000,
             current: 7822438,
             topRevenue: [
-                { name: 'Sana Bhagat',         revenue: 2417058, percentOfTarget: Math.round((2417058/500000)*100) },
-                { name: 'Beatriz Donnelly',     revenue: 1745083, percentOfTarget: Math.round((1745083/500000)*100) },
-                { name: 'Younes Meskini',       revenue: 1513773, percentOfTarget: Math.round((1513773/500000)*100) },
-                { name: 'Nohelia Vargas Lopez', revenue: 790810,  percentOfTarget: Math.round((790810/500000)*100)  },
-                { name: 'Urska Bricelj',        revenue: 488332,  percentOfTarget: Math.round((488332/500000)*100)  }
+                { name: 'Sana Bhagat', revenue: 2417058, percentOfTarget: 20 },
+                { name: 'Beatriz Donnelly', revenue: 1745083, percentOfTarget: 15 },
+                { name: 'Younes Meskini', revenue: 1513773, percentOfTarget: 13 },
+                { name: 'Nohelia Vargas Lopez', revenue: 790810, percentOfTarget: 7 },
+                { name: 'Urska Bricelj', revenue: 488332, percentOfTarget: 4 }
             ],
             topProgress: [
-                { name: 'Sana Bhagat',         previousWeek: 0, current: 2417058, progress: 100, percentOfTarget: Math.round((2417058/500000)*100) },
-                { name: 'Beatriz Donnelly',     previousWeek: 0, current: 1745083, progress: 100, percentOfTarget: Math.round((1745083/500000)*100) },
-                { name: 'Younes Meskini',       previousWeek: 0, current: 1513773, progress: 100, percentOfTarget: Math.round((1513773/500000)*100) },
-                { name: 'Nohelia Vargas Lopez', previousWeek: 0, current: 790810,  progress: 100, percentOfTarget: Math.round((790810/500000)*100)  },
-                { name: 'Danilo Giordano',      previousWeek: 0, current: 382929,  progress: 100, percentOfTarget: Math.round((382929/500000)*100)  }
+                { name: 'Sana Bhagat', previousWeek: 0, current: 2417058, progress: 2417058, percentOfTarget: 20 },
+                { name: 'Beatriz Donnelly', previousWeek: 0, current: 1745083, progress: 1745083, percentOfTarget: 15 },
+                { name: 'Younes Meskini', previousWeek: 0, current: 1513773, progress: 1513773, percentOfTarget: 13 },
+                { name: 'Nohelia Vargas Lopez', previousWeek: 0, current: 790810, progress: 790810, percentOfTarget: 7 },
+                { name: 'Urska Bricelj', previousWeek: 0, current: 488332, progress: 488332, percentOfTarget: 4 }
             ],
             teams: {
                 'MEA — Mennatullah Abdel-Hamid': {
-                    percentage: Math.round((2417058/3000000)*100),
+                    percentage: 52,
                     revenue: 2417058,
-                    target: 3000000,
+                    target: 4650000,
+                    market: 'mea',
                     reps: [
-                        { name: 'Sana Bhagat', revenue: 2417058, target: 3000000, percentOfTarget: Math.round((2417058/3000000)*100), progress: 100, status: 'good' }
+                        { name: 'Sana Bhagat', revenue: 2417058, target: 5120000, percentOfTarget: 47, progress: 2417058, region: 'mea', q1: 1859729, q2: 557329, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'NCEE — Emilie Peloille': {
-                    percentage: Math.round((1745083/2000000)*100),
+                    percentage: 52,
                     revenue: 1745083,
-                    target: 2000000,
+                    target: 3350000,
+                    market: 'ncee',
                     reps: [
-                        { name: 'Beatriz Donnelly', revenue: 1745083, target: 2000000, percentOfTarget: Math.round((1745083/2000000)*100), progress: 100, status: 'good' }
+                        { name: 'Beatriz Donnelly', revenue: 1745083, target: 3690000, percentOfTarget: 47, progress: 1745083, region: 'ncee', q1: 1745083, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'MEA — Mohamed El-hussein': {
-                    percentage: Math.round((1513773/2000000)*100),
+                    percentage: 52,
                     revenue: 1513773,
-                    target: 2000000,
+                    target: 2900000,
+                    market: 'mea',
                     reps: [
-                        { name: 'Younes Meskini', revenue: 1513773, target: 2000000, percentOfTarget: Math.round((1513773/2000000)*100), progress: 100, status: 'good' }
+                        { name: 'Younes Meskini', revenue: 1513773, target: 3190000, percentOfTarget: 47, progress: 1513773, region: 'mea', q1: 706773, q2: 807000, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'NCEE — Ryan Hughes': {
-                    percentage: Math.round((790810/1200000)*100),
+                    percentage: 53,
                     revenue: 790810,
-                    target: 1200000,
+                    target: 1500000,
+                    market: 'ncee',
                     reps: [
-                        { name: 'Nohelia Vargas Lopez', revenue: 790810, target: 1200000, percentOfTarget: Math.round((790810/1200000)*100), progress: 100, status: 'good' }
+                        { name: 'Nohelia Vargas Lopez', revenue: 790810, target: 1650000, percentOfTarget: 48, progress: 790810, region: 'ncee', q1: 348721, q2: 442090, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'NCEE — Sofie Van Acker': {
-                    percentage: Math.round((488332/800000)*100),
+                    percentage: 51,
                     revenue: 488332,
-                    target: 800000,
+                    target: 950000,
+                    market: 'ncee',
                     reps: [
-                        { name: 'Urska Bricelj', revenue: 488332, target: 800000, percentOfTarget: Math.round((488332/800000)*100), progress: 100, status: 'good' }
+                        { name: 'Urska Bricelj', revenue: 488332, target: 1050000, percentOfTarget: 47, progress: 488332, region: 'ncee', q1: 430608, q2: 57724, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'Italy — Luca Cialdella': {
-                    percentage: Math.round((382929/600000)*100),
+                    percentage: 51,
                     revenue: 382929,
-                    target: 600000,
+                    target: 750000,
+                    market: 'italy',
                     reps: [
-                        { name: 'Danilo Giordano', revenue: 382929, target: 600000, percentOfTarget: Math.round((382929/600000)*100), progress: 100, status: 'good' }
-                    ]
-                },
-                'UKI — Malin Manning': {
-                    percentage: Math.round((131000/400000)*100),
-                    revenue: 131000,
-                    target: 400000,
-                    reps: [
-                        { name: 'Ciaran Lonergan', revenue: 131000, target: 400000, percentOfTarget: Math.round((131000/400000)*100), progress: 100, status: 'good' }
+                        { name: 'Danilo Giordano', revenue: 382929, target: 830000, percentOfTarget: 46, progress: 382929, region: 'italy', q1: 382929, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'France — Gregori Lafont': {
-                    percentage: Math.round((134213/300000)*100),
+                    percentage: 54,
                     revenue: 134213,
-                    target: 300000,
+                    target: 250000,
+                    market: 'france',
                     reps: [
-                        { name: 'Charlene Charrier', revenue: 134213, target: 300000, percentOfTarget: Math.round((134213/300000)*100), progress: 100, status: 'good' }
+                        { name: 'Charlene Charrier', revenue: 134213, target: 280000, percentOfTarget: 48, progress: 134213, region: 'france', q1: 0, q2: 134213, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
-                'DACH — Data Withheld Mgr': {
-                    percentage: Math.round((117327/300000)*100),
+                'UKI — Malin Manning': {
+                    percentage: 52,
+                    revenue: 131000,
+                    target: 250000,
+                    market: 'uki',
+                    reps: [
+                        { name: 'Ciaran Lonergan', revenue: 131000, target: 280000, percentOfTarget: 47, progress: 131000, region: 'uki', q1: 0, q2: 131000, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'DACH — Data Withheld Data Withheld': {
+                    percentage: 59,
                     revenue: 117327,
-                    target: 300000,
+                    target: 200000,
+                    market: 'dach',
                     reps: [
-                        { name: 'Thomas Devlin',       revenue: 72455, target: 200000, percentOfTarget: Math.round((72455/200000)*100),  progress: 100, status: 'good' },
-                        { name: 'Data Withheld Rep',   revenue: 44872, target: 100000, percentOfTarget: Math.round((44872/100000)*100),  progress: 100, status: 'good' }
-                    ]
-                },
-                'DACH — David Linnie': {
-                    percentage: Math.round((18574/100000)*100),
-                    revenue: 18574,
-                    target: 100000,
-                    reps: [
-                        { name: 'Silvia Habova', revenue: 15130, target: 60000, percentOfTarget: Math.round((15130/60000)*100), progress: 100, status: 'good' },
-                        { name: 'Mark Bohan',    revenue: 3444,  target: 40000, percentOfTarget: Math.round((3444/40000)*100),  progress: 100, status: 'good' }
+                        { name: 'Thomas Devlin', revenue: 72455, target: 140000, percentOfTarget: 52, progress: 72455, region: 'dach', q1: 0, q2: 72455, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Data Withheld Data Withheld', revenue: 44872, target: 80000, percentOfTarget: 56, progress: 44872, region: 'dach', q1: 5500, q2: 39372, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'SPGI — Isabel Sanz': {
-                    percentage: Math.round((83339/200000)*100),
+                    percentage: 56,
                     revenue: 83339,
-                    target: 200000,
+                    target: 150000,
+                    market: 'spgi',
                     reps: [
-                        { name: 'Vera Costa',     revenue: 50199, target: 100000, percentOfTarget: Math.round((50199/100000)*100), progress: 100, status: 'good' },
-                        { name: 'Rui Carvalho',   revenue: 28352, target: 70000,  percentOfTarget: Math.round((28352/70000)*100),  progress: 100, status: 'good' },
-                        { name: 'Donato Moscato', revenue: 4788,  target: 30000,  percentOfTarget: Math.round((4788/30000)*100),   progress: 100, status: 'good' }
+                        { name: 'Vera Costa', revenue: 50199, target: 100000, percentOfTarget: 50, progress: 50199, region: 'spgi', q1: 50199, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Rui Carvalho', revenue: 28352, target: 60000, percentOfTarget: 47, progress: 28352, region: 'spgi', q1: 2678, q2: 25673, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Donato Moscato', revenue: 4788, target: 50000, percentOfTarget: 10, progress: 4788, region: 'spgi', q1: 0, q2: 4788, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'DACH — David Linnie': {
+                    percentage: 19,
+                    revenue: 18574,
+                    target: 100000,
+                    market: 'dach',
+                    reps: [
+                        { name: 'Silvia Habova', revenue: 15130, target: 90000, percentOfTarget: 17, progress: 15130, region: 'dach', q1: 15130, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Mark Bohan', revenue: 3444, target: 50000, percentOfTarget: 7, progress: 3444, region: 'dach', q1: 3444, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 }
             }
         },
         cap: {
-            percentage: Math.round((54731 / 2000000) * 100),
+            percentage: 3,
             target: 2000000,
             current: 54731,
             topRevenue: [
-                { name: 'Soufiane Azzane', revenue: 54731, percentOfTarget: Math.round((54731/200000)*100) }
+                { name: 'Soufiane Azzane', revenue: 54731, percentOfTarget: 0 }
             ],
             topProgress: [
-                { name: 'Soufiane Azzane', previousWeek: 0, current: 54731, progress: 100, percentOfTarget: Math.round((54731/200000)*100) }
+                { name: 'Soufiane Azzane', previousWeek: 0, current: 54731, progress: 54731, percentOfTarget: 3 }
             ],
             teams: {
                 'France — Gregori Lafont': {
-                    percentage: Math.round((54731/500000)*100),
+                    percentage: 2,
                     revenue: 54731,
-                    target: 500000,
+                    target: 2500000,
+                    market: 'france',
                     reps: [
-                        { name: 'Soufiane Azzane', revenue: 54731, target: 200000, percentOfTarget: Math.round((54731/200000)*100), progress: 100, status: 'good' }
+                        { name: 'Soufiane Azzane', revenue: 54731, target: 2750000, percentOfTarget: 2, progress: 54731, region: 'france', q1: 54731, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 }
             }
         },
         recovery: {
-            percentage: Math.round((55509560 / 70000000) * 100),
+            percentage: 79,
             target: 70000000,
-            current: 55509560,
+            current: 55509561,
             topRevenue: [
-                { name: 'Clifford Codd',    revenue: 33853756, percentOfTarget: Math.round((33853756/5000000)*100) },
-                { name: 'Shahd Hesham',     revenue: 6058764,  percentOfTarget: Math.round((6058764/2000000)*100)  },
-                { name: 'Danilo Giordano',  revenue: 3283738,  percentOfTarget: Math.round((3283738/2000000)*100)  },
-                { name: 'Moshibudi B Mahlo',revenue: 966582,   percentOfTarget: Math.round((966582/500000)*100)    },
-                { name: 'Hussein M El-assiouty', revenue: 494199, percentOfTarget: Math.round((494199/300000)*100) }
+                { name: 'Clifford Codd', revenue: 33853756, percentOfTarget: 282 },
+                { name: 'Shahd Hesham', revenue: 6058764, percentOfTarget: 50 },
+                { name: 'Danilo Giordano', revenue: 3283738, percentOfTarget: 27 },
+                { name: 'Nohelia Vargas Lopez', revenue: 1505779, percentOfTarget: 13 },
+                { name: 'Urska Bricelj', revenue: 1481223, percentOfTarget: 12 }
             ],
             topProgress: [
-                { name: 'Clifford Codd',         previousWeek: 0, current: 33853756, progress: 100, percentOfTarget: Math.round((33853756/5000000)*100) },
-                { name: 'Shahd Hesham',           previousWeek: 0, current: 6058764,  progress: 100, percentOfTarget: Math.round((6058764/2000000)*100)  },
-                { name: 'Danilo Giordano',        previousWeek: 0, current: 3283738,  progress: 100, percentOfTarget: Math.round((3283738/2000000)*100)  },
-                { name: 'Moshibudi B Mahlo',      previousWeek: 0, current: 966582,   progress: 100, percentOfTarget: Math.round((966582/500000)*100)    },
-                { name: 'Beatriz Donnelly',       previousWeek: 0, current: 1173660,  progress: 100, percentOfTarget: Math.round((1173660/500000)*100)   }
+                { name: 'Clifford Codd', previousWeek: 0, current: 33853756, progress: 33853756, percentOfTarget: 48 },
+                { name: 'Shahd Hesham', previousWeek: 0, current: 6058764, progress: 6058764, percentOfTarget: 9 },
+                { name: 'Danilo Giordano', previousWeek: 0, current: 3283738, progress: 3283738, percentOfTarget: 5 },
+                { name: 'Nohelia Vargas Lopez', previousWeek: 0, current: 1505779, progress: 1505779, percentOfTarget: 2 },
+                { name: 'Urska Bricelj', previousWeek: 0, current: 1481223, progress: 1481223, percentOfTarget: 2 }
             ],
             teams: {
                 'UKI — Malin Manning': {
-                    percentage: Math.round((34037445/40000000)*100),
+                    percentage: 63,
                     revenue: 34037445,
-                    target: 40000000,
+                    target: 53650000,
+                    market: 'uki',
                     reps: [
-                        { name: 'Clifford Codd',   revenue: 33853756, target: 35000000, percentOfTarget: Math.round((33853756/35000000)*100), progress: 100, status: 'excellent' },
-                        { name: 'Brian Dowling',   revenue: 78052,    target: 2000000,  percentOfTarget: Math.round((78052/2000000)*100),    progress: 100, status: 'good'      },
-                        { name: 'Mohit Kapoor',    revenue: 38669,    target: 1000000,  percentOfTarget: Math.round((38669/1000000)*100),    progress: 100, status: 'good'      },
-                        { name: 'Catherine Hoey',  revenue: 36448,    target: 1000000,  percentOfTarget: Math.round((36448/1000000)*100),    progress: 100, status: 'good'      },
-                        { name: 'Lilia Solodcaia', revenue: 26582,    target: 500000,   percentOfTarget: Math.round((26582/500000)*100),     progress: 100, status: 'good'      },
-                        { name: 'AIDAN HOOLAHAN',  revenue: 3937,     target: 500000,   percentOfTarget: Math.round((3937/500000)*100),      progress: 100, status: 'good'      }
-                    ]
-                },
-                'UKI — Giuseppe Aurilia': {
-                    percentage: Math.round((169881/500000)*100),
-                    revenue: 169881,
-                    target: 500000,
-                    reps: [
-                        { name: 'Claire Dunne',               revenue: 103694, target: 200000, percentOfTarget: Math.round((103694/200000)*100), progress: 100, status: 'good' },
-                        { name: 'Ladislav Michalek',          revenue: 33725,  target: 100000, percentOfTarget: Math.round((33725/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'Gloria Joshy',               revenue: 21000,  target: 80000,  percentOfTarget: Math.round((21000/80000)*100),   progress: 100, status: 'good' },
-                        { name: 'Christopher Verdelli-mason', revenue: 7463,   target: 80000,  percentOfTarget: Math.round((7463/80000)*100),    progress: 100, status: 'good' },
-                        { name: "David O'brien",              revenue: 4000,   target: 40000,  percentOfTarget: Math.round((4000/40000)*100),    progress: 100, status: 'good' }
+                        { name: 'Clifford Codd', revenue: 33853756, target: 58700000, percentOfTarget: 58, progress: 33853756, region: 'uki', q1: 33853756, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Brian Dowling', revenue: 78052, target: 140000, percentOfTarget: 56, progress: 78052, region: 'uki', q1: 78052, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Mohit Kapoor', revenue: 38669, target: 70000, percentOfTarget: 55, progress: 38669, region: 'uki', q1: 38669, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Catherine Hoey', revenue: 36448, target: 60000, percentOfTarget: 61, progress: 36448, region: 'uki', q1: 36448, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Lilia Solodcaia', revenue: 26582, target: 50000, percentOfTarget: 53, progress: 26582, region: 'uki', q1: 0, q2: 26582, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'AIDAN HOOLAHAN', revenue: 3937, target: 50000, percentOfTarget: 8, progress: 3937, region: 'uki', q1: 3937, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'MEA — Charbel Antonios': {
-                    percentage: Math.round((7390035/10000000)*100),
+                    percentage: 63,
                     revenue: 7390035,
-                    target: 10000000,
+                    target: 11650000,
+                    market: 'mea',
                     reps: [
-                        { name: 'Shahd Hesham',     revenue: 6058764, target: 7000000, percentOfTarget: Math.round((6058764/7000000)*100), progress: 100, status: 'excellent' },
-                        { name: 'Moshibudi B Mahlo', revenue: 966582,  target: 2000000, percentOfTarget: Math.round((966582/2000000)*100),  progress: 100, status: 'good'      },
-                        { name: 'Manal Algarni',    revenue: 279690,  target: 600000,  percentOfTarget: Math.round((279690/600000)*100),   progress: 100, status: 'good'      },
-                        { name: 'Mai Ahmad',        revenue: 85000,   target: 400000,  percentOfTarget: Math.round((85000/400000)*100),    progress: 100, status: 'good'      }
-                    ]
-                },
-                'MEA — Mohamed El-hussein': {
-                    percentage: Math.round((1487893/2000000)*100),
-                    revenue: 1487893,
-                    target: 2000000,
-                    reps: [
-                        { name: 'Marie Shawky',              revenue: 464389, target: 500000, percentOfTarget: Math.round((464389/500000)*100), progress: 100, status: 'good' },
-                        { name: 'Daniel Gajek',              revenue: 415057, target: 500000, percentOfTarget: Math.round((415057/500000)*100), progress: 100, status: 'good' },
-                        { name: 'Tamer Mohamed Bahaa Eldin',  revenue: 263836, target: 400000, percentOfTarget: Math.round((263836/400000)*100), progress: 100, status: 'good' },
-                        { name: 'Sajid Ali Khan',            revenue: 219435, target: 400000, percentOfTarget: Math.round((219435/400000)*100), progress: 100, status: 'good' },
-                        { name: 'Yasir Saleem',              revenue: 125175, target: 200000, percentOfTarget: Math.round((125175/200000)*100), progress: 100, status: 'good' }
-                    ]
-                },
-                'MEA — Mennatullah Abdel-Hamid': {
-                    percentage: Math.round((1435019/2000000)*100),
-                    revenue: 1435019,
-                    target: 2000000,
-                    reps: [
-                        { name: 'Hussein M El-assiouty', revenue: 494199, target: 600000, percentOfTarget: Math.round((494199/600000)*100), progress: 100, status: 'good' },
-                        { name: 'Tania Scheepers',       revenue: 423915, target: 500000, percentOfTarget: Math.round((423915/500000)*100), progress: 100, status: 'good' },
-                        { name: 'Amina Khomsi Zobkhi',   revenue: 183998, target: 400000, percentOfTarget: Math.round((183998/400000)*100), progress: 100, status: 'good' },
-                        { name: 'Cagla Seher Gurer',     revenue: 121800, target: 300000, percentOfTarget: Math.round((121800/300000)*100), progress: 100, status: 'good' },
-                        { name: 'Isil Baygan',           revenue: 108000, target: 200000, percentOfTarget: Math.round((108000/200000)*100), progress: 100, status: 'good' },
-                        { name: 'Rima Alsunaid',         revenue: 103107, target: 200000, percentOfTarget: Math.round((103107/200000)*100), progress: 100, status: 'good' }
+                        { name: 'Shahd Hesham', revenue: 6058764, target: 10510000, percentOfTarget: 58, progress: 6058764, region: 'mea', q1: 1059759, q2: 4999005, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Moshibudi B Mahlo', revenue: 966582, target: 1680000, percentOfTarget: 58, progress: 966582, region: 'mea', q1: 0, q2: 966582, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Manal Algarni', revenue: 279690, target: 490000, percentOfTarget: 57, progress: 279690, region: 'mea', q1: 279690, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Mai Ahmad', revenue: 85000, target: 150000, percentOfTarget: 57, progress: 85000, region: 'mea', q1: 0, q2: 85000, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'Italy — Luca Cialdella': {
-                    percentage: Math.round((3614471/5000000)*100),
+                    percentage: 63,
                     revenue: 3614471,
-                    target: 5000000,
+                    target: 5700000,
+                    market: 'italy',
                     reps: [
-                        { name: 'Danilo Giordano',   revenue: 3283738, target: 4000000, percentOfTarget: Math.round((3283738/4000000)*100), progress: 100, status: 'good' },
-                        { name: 'Massimo Giannetta', revenue: 330733,  target: 1000000, percentOfTarget: Math.round((330733/1000000)*100),  progress: 100, status: 'good' }
+                        { name: 'Danilo Giordano', revenue: 3283738, target: 5700000, percentOfTarget: 58, progress: 3283738, region: 'italy', q1: 406896, q2: 2876842, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Massimo Giannetta', revenue: 330733, target: 570000, percentOfTarget: 58, progress: 330733, region: 'italy', q1: 0, q2: 330733, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'NCEE — Ryan Hughes': {
-                    percentage: Math.round((1505779/2000000)*100),
+                    percentage: 64,
                     revenue: 1505779,
-                    target: 2000000,
+                    target: 2350000,
+                    market: 'ncee',
                     reps: [
-                        { name: 'Nohelia Vargas Lopez', revenue: 1505779, target: 1900000, percentOfTarget: Math.round((1505779/1900000)*100), progress: 100, status: 'good' },
-                        { name: 'Katarina Lancz',       revenue: 0,       target: 100000,  percentOfTarget: 0, progress: 0, status: 'good' }
+                        { name: 'Nohelia Vargas Lopez', revenue: 1505779, target: 2580000, percentOfTarget: 58, progress: 1505779, region: 'ncee', q1: 231694, q2: 1274085, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Katarina Lancz', revenue: 0, target: 50000, percentOfTarget: 0, progress: 0, region: 'ncee', q1: 0, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'MEA — Mohamed El-hussein': {
+                    percentage: 63,
+                    revenue: 1487893,
+                    target: 2350000,
+                    market: 'mea',
+                    reps: [
+                        { name: 'Marie Shawky', revenue: 464389, target: 810000, percentOfTarget: 57, progress: 464389, region: 'mea', q1: 464389, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Daniel Gajek', revenue: 415057, target: 720000, percentOfTarget: 58, progress: 415057, region: 'mea', q1: 161271, q2: 253786, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Tamer Mohamed Bahaa Eldin', revenue: 263836, target: 460000, percentOfTarget: 57, progress: 263836, region: 'mea', q1: 0, q2: 263836, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Sajid Ali Khan', revenue: 219435, target: 380000, percentOfTarget: 58, progress: 219435, region: 'mea', q1: 0, q2: 219435, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Yasir Saleem', revenue: 125175, target: 220000, percentOfTarget: 57, progress: 125175, region: 'mea', q1: 0, q2: 125175, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'NCEE — Sofie Van Acker': {
-                    percentage: Math.round((1481223/2000000)*100),
+                    percentage: 63,
                     revenue: 1481223,
-                    target: 2000000,
+                    target: 2350000,
+                    market: 'ncee',
                     reps: [
-                        { name: 'Urska Bricelj', revenue: 1481223, target: 2000000, percentOfTarget: Math.round((1481223/2000000)*100), progress: 100, status: 'good' }
+                        { name: 'Urska Bricelj', revenue: 1481223, target: 2580000, percentOfTarget: 57, progress: 1481223, region: 'ncee', q1: 457903, q2: 1023321, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'MEA — Mennatullah Abdel-Hamid': {
+                    percentage: 64,
+                    revenue: 1435019,
+                    target: 2250000,
+                    market: 'mea',
+                    reps: [
+                        { name: 'Hussein M El-assiouty', revenue: 494199, target: 850000, percentOfTarget: 58, progress: 494199, region: 'mea', q1: 136858, q2: 357341, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Tania Scheepers', revenue: 423915, target: 730000, percentOfTarget: 58, progress: 423915, region: 'mea', q1: 0, q2: 423915, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Amina Khomsi Zobkhi', revenue: 183998, target: 320000, percentOfTarget: 57, progress: 183998, region: 'mea', q1: 96860, q2: 87139, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Cagla Seher Gurer', revenue: 121800, target: 210000, percentOfTarget: 58, progress: 121800, region: 'mea', q1: 0, q2: 121800, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Isil Baygan', revenue: 108000, target: 190000, percentOfTarget: 57, progress: 108000, region: 'mea', q1: 108000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Rima Alsunaid', revenue: 103107, target: 180000, percentOfTarget: 57, progress: 103107, region: 'mea', q1: 0, q2: 103107, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'NCEE — Emilie Peloille': {
-                    percentage: Math.round((1173660/2000000)*100),
+                    percentage: 63,
                     revenue: 1173660,
-                    target: 2000000,
+                    target: 1850000,
+                    market: 'ncee',
                     reps: [
-                        { name: 'Beatriz Donnelly', revenue: 1173660, target: 2000000, percentOfTarget: Math.round((1173660/2000000)*100), progress: 100, status: 'good' }
+                        { name: 'Beatriz Donnelly', revenue: 1173660, target: 2040000, percentOfTarget: 58, progress: 1173660, region: 'ncee', q1: 492892, q2: 680768, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
-                'France — Frederic Derieux': {
-                    percentage: Math.round((272901/500000)*100),
-                    revenue: 272901,
-                    target: 500000,
+                'UKI — Danny Rowark': {
+                    percentage: 62,
+                    revenue: 1000000,
+                    target: 1600000,
+                    market: 'uki',
                     reps: [
-                        { name: 'Andre Laposi',        revenue: 144150, target: 200000, percentOfTarget: Math.round((144150/200000)*100), progress: 100, status: 'good' },
-                        { name: 'Philippe Toy Riont',  revenue: 123000, target: 200000, percentOfTarget: Math.round((123000/200000)*100), progress: 100, status: 'good' },
-                        { name: 'Andre Deville',       revenue: 5751,   target: 100000, percentOfTarget: Math.round((5751/100000)*100),   progress: 100, status: 'good' }
-                    ]
-                },
-                'France — Gregori Lafont': {
-                    percentage: Math.round((667499/1000000)*100),
-                    revenue: 667499,
-                    target: 1000000,
-                    reps: [
-                        { name: 'Charlene Charrier',         revenue: 264028, target: 300000, percentOfTarget: Math.round((264028/300000)*100), progress: 100, status: 'good' },
-                        { name: "Guillaume T'kint",          revenue: 78316,  target: 100000, percentOfTarget: Math.round((78316/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'David Rudd',                revenue: 74202,  target: 100000, percentOfTarget: Math.round((74202/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'Nathan Carton',             revenue: 68972,  target: 100000, percentOfTarget: Math.round((68972/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'Ahlonko Komla',             revenue: 60303,  target: 100000, percentOfTarget: Math.round((60303/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'Loic Etienne',              revenue: 41681,  target: 100000, percentOfTarget: Math.round((41681/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'Christopher Ammar',         revenue: 41033,  target: 100000, percentOfTarget: Math.round((41033/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'Maxime Garcia',             revenue: 25000,  target: 100000, percentOfTarget: Math.round((25000/100000)*100),  progress: 100, status: 'good' },
-                        { name: 'Nader (Nader) Farag',       revenue: 13965,  target: 100000, percentOfTarget: Math.round((13965/100000)*100),  progress: 100, status: 'good' }
+                        { name: 'Mark Smith', revenue: 1000000, target: 1760000, percentOfTarget: 57, progress: 1000000, region: 'uki', q1: 1000000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'SPGI — Isabel Sanz': {
-                    percentage: Math.round((907575/1500000)*100),
+                    percentage: 63,
                     revenue: 907575,
-                    target: 1500000,
+                    target: 1450000,
+                    market: 'spgi',
                     reps: [
-                        { name: 'Liat Shoshani',                       revenue: 341688, target: 300000, percentOfTarget: Math.round((341688/300000)*100), progress: 100, status: 'excellent' },
-                        { name: 'Silvia Garcia Sanchez',               revenue: 233722, target: 300000, percentOfTarget: Math.round((233722/300000)*100), progress: 100, status: 'good'      },
-                        { name: 'Liene Korsiete',                      revenue: 156000, target: 200000, percentOfTarget: Math.round((156000/200000)*100), progress: 100, status: 'good'      },
-                        { name: 'Antonio Scarfato',                    revenue: 54720,  target: 150000, percentOfTarget: Math.round((54720/150000)*100),  progress: 100, status: 'good'      },
-                        { name: 'Adrian Alvarez Troncoso',             revenue: 53625,  target: 150000, percentOfTarget: Math.round((53625/150000)*100),  progress: 100, status: 'good'      },
-                        { name: 'Evangelos (Vagelis) Papaioannou',     revenue: 40436,  target: 150000, percentOfTarget: Math.round((40436/150000)*100),  progress: 100, status: 'good'      },
-                        { name: 'Rui Carvalho',                        revenue: 22307,  target: 100000, percentOfTarget: Math.round((22307/100000)*100),  progress: 100, status: 'good'      },
-                        { name: 'Silvia Demontis',                     revenue: 5077,   target: 150000, percentOfTarget: Math.round((5077/150000)*100),   progress: 100, status: 'good'      }
+                        { name: 'Liat Shoshani', revenue: 341688, target: 600000, percentOfTarget: 57, progress: 341688, region: 'spgi', q1: 32340, q2: 309348, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Silvia Garcia Sanchez', revenue: 233722, target: 410000, percentOfTarget: 57, progress: 233722, region: 'spgi', q1: 0, q2: 233722, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Liene Korsiete', revenue: 156000, target: 270000, percentOfTarget: 58, progress: 156000, region: 'spgi', q1: 50000, q2: 106000, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Antonio Scarfato', revenue: 54720, target: 100000, percentOfTarget: 55, progress: 54720, region: 'spgi', q1: 54720, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Adrian Alvarez Troncoso', revenue: 53625, target: 90000, percentOfTarget: 60, progress: 53625, region: 'spgi', q1: 13124, q2: 40501, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Evangelos (Vagelis) Papaioannou', revenue: 40436, target: 70000, percentOfTarget: 58, progress: 40436, region: 'spgi', q1: 0, q2: 40436, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Rui Carvalho', revenue: 22307, target: 50000, percentOfTarget: 45, progress: 22307, region: 'spgi', q1: 22307, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Silvia Demontis', revenue: 5077, target: 50000, percentOfTarget: 10, progress: 5077, region: 'spgi', q1: 2235, q2: 2842, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
-                'DACH — Data Withheld Mgr': {
-                    percentage: Math.round((154247/400000)*100),
-                    revenue: 154247,
-                    target: 400000,
+                'France — Gregori Lafont': {
+                    percentage: 64,
+                    revenue: 667499,
+                    target: 1050000,
+                    market: 'france',
                     reps: [
-                        { name: 'Data Withheld Rep', revenue: 154247, target: 400000, percentOfTarget: Math.round((154247/400000)*100), progress: 100, status: 'good' }
+                        { name: 'Charlene Charrier', revenue: 264028, target: 460000, percentOfTarget: 57, progress: 264028, region: 'france', q1: 223695, q2: 40333, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Guillaume T`kint', revenue: 78316, target: 140000, percentOfTarget: 56, progress: 78316, region: 'france', q1: 0, q2: 78316, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'David Rudd', revenue: 74202, target: 130000, percentOfTarget: 57, progress: 74202, region: 'france', q1: 62720, q2: 11482, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Nathan Carton', revenue: 68972, target: 120000, percentOfTarget: 57, progress: 68972, region: 'france', q1: 2995, q2: 65977, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Ahlonko Komla', revenue: 60303, target: 100000, percentOfTarget: 60, progress: 60303, region: 'france', q1: 0, q2: 60303, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Loic Etienne', revenue: 41681, target: 70000, percentOfTarget: 60, progress: 41681, region: 'france', q1: 41681, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Christopher Ammar', revenue: 41033, target: 70000, percentOfTarget: 59, progress: 41033, region: 'france', q1: 28222, q2: 12811, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Maxime Garcia', revenue: 25000, target: 50000, percentOfTarget: 50, progress: 25000, region: 'france', q1: 0, q2: 25000, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Nader (Nader) Farag', revenue: 13965, target: 50000, percentOfTarget: 28, progress: 13965, region: 'france', q1: 0, q2: 13965, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
-                'DACH — Bettina Curran': {
-                    percentage: Math.round((158958/400000)*100),
+                'France — Frederic Derieux': {
+                    percentage: 61,
+                    revenue: 272901,
+                    target: 450000,
+                    market: 'france',
+                    reps: [
+                        { name: 'Andre Laposi', revenue: 144150, target: 260000, percentOfTarget: 55, progress: 144150, region: 'france', q1: 0, q2: 144150, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Philippe Toy Riont', revenue: 123000, target: 220000, percentOfTarget: 56, progress: 123000, region: 'france', q1: 123000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Andre Deville', revenue: 5751, target: 50000, percentOfTarget: 12, progress: 5751, region: 'france', q1: 5751, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'UKI — Giuseppe Aurilia': {
+                    percentage: 68,
+                    revenue: 169881,
+                    target: 250000,
+                    market: 'uki',
+                    reps: [
+                        { name: 'Claire Dunne', revenue: 103694, target: 170000, percentOfTarget: 61, progress: 103694, region: 'uki', q1: 103694, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Ladislav Michalek', revenue: 33725, target: 50000, percentOfTarget: 67, progress: 33725, region: 'uki', q1: 0, q2: 0, q3: 0, q4: 33725, status: 'needs-improvement' },
+                        { name: 'Gloria Joshy', revenue: 21000, target: 50000, percentOfTarget: 42, progress: 21000, region: 'uki', q1: 0, q2: 21000, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Christopher Verdelli-mason', revenue: 7463, target: 50000, percentOfTarget: 15, progress: 7463, region: 'uki', q1: 7463, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'David O`brien', revenue: 4000, target: 50000, percentOfTarget: 8, progress: 4000, region: 'uki', q1: 0, q2: 4000, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'DACH — BETTINA CURRAN': {
+                    percentage: 64,
                     revenue: 158958,
-                    target: 400000,
+                    target: 250000,
+                    market: 'dach',
                     reps: [
-                        { name: 'Data Withheld Rep', revenue: 158958, target: 400000, percentOfTarget: Math.round((158958/400000)*100), progress: 100, status: 'good' }
+                        { name: 'Data Withheld Data Withheld', revenue: 158958, target: 280000, percentOfTarget: 57, progress: 158958, region: 'dach', q1: 0, q2: 158958, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'DACH — Data Withheld Data Withheld': {
+                    percentage: 62,
+                    revenue: 154247,
+                    target: 250000,
+                    market: 'dach',
+                    reps: [
+                        { name: 'Data Withheld Data Withheld', revenue: 154247, target: 280000, percentOfTarget: 55, progress: 154247, region: 'dach', q1: 97000, q2: 57247, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'UKI — Dushmanta Roy': {
+                    percentage: 33,
+                    revenue: 33007,
+                    target: 100000,
+                    market: 'uki',
+                    reps: [
+                        { name: 'Julian Perkins', revenue: 33007, target: 110000, percentOfTarget: 30, progress: 33007, region: 'uki', q1: 33007, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'Italy — Maria Antonietta (Antonella) Tartaglia': {
+                    percentage: 10,
+                    revenue: 10000,
+                    target: 100000,
+                    market: 'italy',
+                    reps: [
+                        { name: 'Raffaella Serioli', revenue: 10000, target: 110000, percentOfTarget: 9, progress: 10000, region: 'italy', q1: 10000, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 },
                 'DACH — David Linnie': {
-                    percentage: Math.round((8967/200000)*100),
+                    percentage: 9,
                     revenue: 8967,
-                    target: 200000,
+                    target: 100000,
+                    market: 'dach',
                     reps: [
-                        { name: 'Ciaran Mcguinness', revenue: 6733, target: 130000, percentOfTarget: Math.round((6733/130000)*100), progress: 100, status: 'good' },
-                        { name: 'Mark Bohan',        revenue: 2235, target: 70000,  percentOfTarget: Math.round((2235/70000)*100),  progress: 100, status: 'good' }
+                        { name: 'Ciaran Mcguinness', revenue: 6733, target: 80000, percentOfTarget: 8, progress: 6733, region: 'dach', q1: 6733, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' },
+                        { name: 'Mark Bohan', revenue: 2235, target: 50000, percentOfTarget: 4, progress: 2235, region: 'dach', q1: 2235, q2: 0, q3: 0, q4: 0, status: 'needs-improvement' }
+                    ]
+                },
+                'NCEE — Lars Lindegaard': {
+                    percentage: 1,
+                    revenue: 1000,
+                    target: 100000,
+                    market: 'ncee',
+                    reps: [
+                        { name: 'Christian Ladefoged', revenue: 1000, target: 110000, percentOfTarget: 1, progress: 1000, region: 'ncee', q1: 0, q2: 1000, q3: 0, q4: 0, status: 'needs-improvement' }
                     ]
                 }
             }
@@ -444,125 +529,16 @@ const dashboardData = {
     },
     acv: {
         'S&S': {
-            percentage: 88,
-            target: 2000000,
+            percentage: 88, target: 2000000,
             topRevenue: [
-                { name: 'William Turner', revenue: 225000, percentOfTarget: 113 },
-                { name: 'Elizabeth Hall', revenue: 218000, percentOfTarget: 109 },
-                { name: 'Richard Allen',  revenue: 212000, percentOfTarget: 106 },
-                { name: 'Barbara King',   revenue: 208000, percentOfTarget: 104 },
-                { name: 'Joseph Wright',  revenue: 205000, percentOfTarget: 103 }
+                { name: 'Placeholder Rep', revenue: 200000, percentOfTarget: 100 }
             ],
             topProgress: [
-                { name: 'William Turner', previousWeek: 180000, current: 225000, progress: 25,   percentOfTarget: 113 },
-                { name: 'Elizabeth Hall', previousWeek: 175000, current: 218000, progress: 24.6, percentOfTarget: 109 },
-                { name: 'Richard Allen',  previousWeek: 170000, current: 212000, progress: 24.7, percentOfTarget: 106 },
-                { name: 'Barbara King',   previousWeek: 168000, current: 208000, progress: 23.8, percentOfTarget: 104 },
-                { name: 'Joseph Wright',  previousWeek: 165000, current: 205000, progress: 24.2, percentOfTarget: 103 }
+                { name: 'Placeholder Rep', previousWeek: 0, current: 200000, progress: 200000, percentOfTarget: 100 }
             ],
             teams: {
-                'Team Ryan': {
-                    percentage: 90, revenue: 1800000, target: 2000000,
-                    reps: [
-                        { name: 'William Turner', revenue: 225000, target: 200000, percentOfTarget: 113, progress: 25,   status: 'excellent' },
-                        { name: 'Elizabeth Hall', revenue: 218000, target: 200000, percentOfTarget: 109, progress: 24.6, status: 'excellent' }
-                    ]
-                },
-                'Team Emily': {
-                    percentage: 86, revenue: 1720000, target: 2000000,
-                    reps: [
-                        { name: 'Richard Allen', revenue: 212000, target: 200000, percentOfTarget: 106, progress: 24.7, status: 'excellent' },
-                        { name: 'Barbara King',  revenue: 208000, target: 200000, percentOfTarget: 104, progress: 23.8, status: 'excellent' }
-                    ]
-                },
-                'Team Sophie': {
-                    percentage: 88, revenue: 1760000, target: 2000000,
-                    reps: [
-                        { name: 'Joseph Wright',  revenue: 205000, target: 200000, percentOfTarget: 103, progress: 24.2, status: 'excellent' },
-                        { name: 'Dorothy Lopez',  revenue: 202000, target: 200000, percentOfTarget: 101, progress: 23.5, status: 'excellent' }
-                    ]
-                }
-            }
-        },
-        SL: {
-            percentage: 76,
-            target: 1500000,
-            topRevenue: [
-                { name: 'Thomas Green',     revenue: 165000, percentOfTarget: 110 },
-                { name: 'Susan Baker',      revenue: 158000, percentOfTarget: 105 },
-                { name: 'Charles Evans',    revenue: 152000, percentOfTarget: 101 },
-                { name: 'Margaret Collins', revenue: 148000, percentOfTarget: 99  },
-                { name: 'Donald Stewart',   revenue: 145000, percentOfTarget: 97  }
-            ],
-            topProgress: [
-                { name: 'Thomas Green',     previousWeek: 130000, current: 165000, progress: 26.9, percentOfTarget: 110 },
-                { name: 'Susan Baker',      previousWeek: 125000, current: 158000, progress: 26.4, percentOfTarget: 105 },
-                { name: 'Charles Evans',    previousWeek: 122000, current: 152000, progress: 24.6, percentOfTarget: 101 },
-                { name: 'Margaret Collins', previousWeek: 120000, current: 148000, progress: 23.3, percentOfTarget: 99  },
-                { name: 'Donald Stewart',   previousWeek: 118000, current: 145000, progress: 22.9, percentOfTarget: 97  }
-            ],
-            teams: {
-                'Team Ryan': {
-                    percentage: 78, revenue: 1170000, target: 1500000,
-                    reps: [
-                        { name: 'Thomas Green', revenue: 165000, target: 150000, percentOfTarget: 110, progress: 26.9, status: 'excellent' },
-                        { name: 'Susan Baker',  revenue: 158000, target: 150000, percentOfTarget: 105, progress: 26.4, status: 'excellent' }
-                    ]
-                },
-                'Team Emily': {
-                    percentage: 74, revenue: 1110000, target: 1500000,
-                    reps: [
-                        { name: 'Charles Evans',    revenue: 152000, target: 150000, percentOfTarget: 101, progress: 24.6, status: 'excellent' },
-                        { name: 'Margaret Collins', revenue: 148000, target: 150000, percentOfTarget: 99,  progress: 23.3, status: 'good'      }
-                    ]
-                },
-                'Team Sophie': {
-                    percentage: 76, revenue: 1140000, target: 1500000,
-                    reps: [
-                        { name: 'Donald Stewart', revenue: 145000, target: 150000, percentOfTarget: 97, progress: 22.9, status: 'good' },
-                        { name: 'Carol Morris',   revenue: 142000, target: 150000, percentOfTarget: 95, progress: 22.1, status: 'good' }
-                    ]
-                }
-            }
-        },
-        SaaS: {
-            percentage: 92,
-            target: 2500000,
-            topRevenue: [
-                { name: 'Matthew Rogers', revenue: 285000, percentOfTarget: 114 },
-                { name: 'Betty Reed',     revenue: 278000, percentOfTarget: 111 },
-                { name: 'Anthony Cook',   revenue: 272000, percentOfTarget: 109 },
-                { name: 'Sandra Morgan',  revenue: 268000, percentOfTarget: 107 },
-                { name: 'Mark Bell',      revenue: 265000, percentOfTarget: 106 }
-            ],
-            topProgress: [
-                { name: 'Matthew Rogers', previousWeek: 225000, current: 285000, progress: 26.7, percentOfTarget: 114 },
-                { name: 'Betty Reed',     previousWeek: 220000, current: 278000, progress: 26.4, percentOfTarget: 111 },
-                { name: 'Anthony Cook',   previousWeek: 218000, current: 272000, progress: 24.8, percentOfTarget: 109 },
-                { name: 'Sandra Morgan',  previousWeek: 215000, current: 268000, progress: 24.7, percentOfTarget: 107 },
-                { name: 'Mark Bell',      previousWeek: 212000, current: 265000, progress: 25,   percentOfTarget: 106 }
-            ],
-            teams: {
-                'Team Ryan': {
-                    percentage: 94, revenue: 2350000, target: 2500000,
-                    reps: [
-                        { name: 'Matthew Rogers', revenue: 285000, target: 250000, percentOfTarget: 114, progress: 26.7, status: 'excellent' },
-                        { name: 'Betty Reed',     revenue: 278000, target: 250000, percentOfTarget: 111, progress: 26.4, status: 'excellent' }
-                    ]
-                },
-                'Team Emily': {
-                    percentage: 90, revenue: 2250000, target: 2500000,
-                    reps: [
-                        { name: 'Anthony Cook',  revenue: 272000, target: 250000, percentOfTarget: 109, progress: 24.8, status: 'excellent' },
-                        { name: 'Sandra Morgan', revenue: 268000, target: 250000, percentOfTarget: 107, progress: 24.7, status: 'excellent' }
-                    ]
-                },
-                'Team Sophie': {
-                    percentage: 92, revenue: 2300000, target: 2500000,
-                    reps: [
-                        { name: 'Mark Bell',    revenue: 265000, target: 250000, percentOfTarget: 106, progress: 25,   status: 'excellent' },
-                        { name: 'Helen Murphy', revenue: 262000, target: 250000, percentOfTarget: 105, progress: 24.5, status: 'excellent' }
-                    ]
+                'Team Placeholder': { percentage: 88, revenue: 1760000, target: 2000000, market: 'all',
+                    reps: [{ name: 'Placeholder', revenue: 200000, target: 200000, percentOfTarget: 100, progress: 200000, region: 'all', q1: 50000, q2: 50000, q3: 50000, q4: 50000, status: 'good' }]
                 }
             }
         }
@@ -570,12 +546,12 @@ const dashboardData = {
 };
 
 const slogans = {
-    50: "Warming up!",
-    60: "Getting moving!",
-    70: "Keep pushing!",
-    80: "Nearly there!",
-    90: "Strong finish!",
-    100: "Target smashed!"
+    50: 'Warming up!',
+    60: 'Getting moving!',
+    70: 'Keep pushing!',
+    80: 'Nearly there!',
+    90: 'Strong finish!',
+    100: 'Target smashed!'
 };
 
 // Made with Bob

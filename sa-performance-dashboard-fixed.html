@@ -309,7 +309,8 @@
                 return filtered;
             }
             
-            // Function to filter data by quarter
+            // Function to filter data by quarter — uses rep.q1/q2/q3/q4 ACV fields
+            // Quarter ranges: Q1=Jan-Mar, Q2=Apr-Jun, Q3=Jul-Sep, Q4=Oct-Dec
             function filterDataByQuarter(categoryData, quarter) {
                 const filtered = {};
                 
@@ -317,27 +318,47 @@
                     const subcategory = categoryData[subcategoryKey];
                     filtered[subcategoryKey] = JSON.parse(JSON.stringify(subcategory));
                     
-                    if (subcategory.hasSubOfferings && subcategory.offerings) {
-                        // Handle support offerings with sub-offerings
-                        Object.keys(subcategory.offerings).forEach(function(offeringKey) {
-                            const offering = subcategory.offerings[offeringKey];
-                            if (offering.teams) {
-                                Object.keys(offering.teams).forEach(function(teamKey) {
-                                    const team = offering.teams[teamKey];
-                                    team.reps = team.reps.filter(function(rep) {
-                                        return rep.quarter === quarter;
-                                    });
+                    function applyQuarterToTeams(teams) {
+                        var totalRev = 0;
+                        var totalTgt = 0;
+                        Object.keys(teams).forEach(function(teamKey) {
+                            const team = teams[teamKey];
+                            var teamQRev = 0;
+                            // Remap each rep's revenue to the selected quarter's ACV
+                            team.reps = team.reps.map(function(rep) {
+                                const qRev = rep[quarter] || 0;
+                                const repTgt = rep.target || 0;
+                                const pot = repTgt > 0 ? Math.round((qRev / repTgt) * 100) : 0;
+                                teamQRev += qRev;
+                                return Object.assign({}, rep, {
+                                    revenue: qRev,
+                                    percentOfTarget: pot,
+                                    progress: qRev
                                 });
+                            }).filter(function(rep) {
+                                return rep.revenue > 0;
+                            });
+                            team.revenue = teamQRev;
+                            team.percentage = team.target > 0 ? Math.round((teamQRev / team.target) * 100) : 0;
+                            totalRev += teamQRev;
+                            totalTgt += team.target || 0;
+                        });
+                        return { totalRev: totalRev, totalTgt: totalTgt };
+                    }
+
+                    if (subcategory.hasSubOfferings && subcategory.offerings) {
+                        Object.keys(subcategory.offerings).forEach(function(offeringKey) {
+                            const offering = filtered[subcategoryKey].offerings[offeringKey];
+                            if (offering.teams) {
+                                applyQuarterToTeams(offering.teams);
                             }
                         });
                     } else if (subcategory.teams) {
-                        // Handle regular subcategories
-                        Object.keys(subcategory.teams).forEach(function(teamKey) {
-                            const team = subcategory.teams[teamKey];
-                            team.reps = team.reps.filter(function(rep) {
-                                return rep.quarter === quarter;
-                            });
-                        });
+                        const totals = applyQuarterToTeams(filtered[subcategoryKey].teams);
+                        if (totals.totalTgt > 0) {
+                            filtered[subcategoryKey].percentage = Math.round((totals.totalRev / totals.totalTgt) * 100);
+                        }
+                        filtered[subcategoryKey].current = totals.totalRev;
                     }
                 });
                 
